@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import org.apache.jena.rdf.model.*;
 
-
+//nothing
 /* ***************************************************************************************************************
  * Class that augments a query result with additional information 
  * 
