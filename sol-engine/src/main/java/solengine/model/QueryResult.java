@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import org.apache.jena.rdf.model.*;
 
-//nothing
+
 /* ***************************************************************************************************************
  * Class that augments a query result with additional information 
  * 
@@ -20,13 +20,9 @@ import org.apache.jena.rdf.model.*;
 
 public class QueryResult implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5743156082940385418L;
 	
 	List<String> result;
-//	private transient Model additionalInfo;
 	String model;
 	
 	public QueryResult(List<String> result){
