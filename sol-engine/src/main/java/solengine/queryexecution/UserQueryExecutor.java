@@ -27,7 +27,7 @@ public class UserQueryExecutor {
         } 
         catch (Exception e) {
 //            e.printStackTrace();
-        	System.out.println("problema de UserQueryProcessor em queryEndpoint" + e.toString());
+        	System.out.println("problem using UserQueryExecutor with queryEndpoint" + e.toString());
         }
 		return null;
 	}

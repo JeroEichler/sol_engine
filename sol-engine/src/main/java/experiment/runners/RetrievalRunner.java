@@ -55,7 +55,7 @@ public class RetrievalRunner {
 	public static String queryWithoutOffset2(){
 		String userQuery = 
 	            "SELECT ?subject where {" + 
-	                    "	?subject <"+Vocabulary.TypeProperty+"> <http://dbpedia.org/ontology/Band> ." + 
+	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <http://dbpedia.org/ontology/Band> ." + 
 	                    "} "
 	                    ;
 		
