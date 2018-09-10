@@ -1,11 +1,19 @@
 package solengine.datasetorchestration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import solengine.model.QueryResult;
+import solengine.queryexecution.IQueryExecutor;
+import solengine.queryexecution.QueryExecutorFactory;
 import solengine.queryexecution.UserQueryExecutor;
+import solengine.utils.Config;
 import solengine.utils.Vocabulary;
 
 public class DatasetOrchestrator {
@@ -18,31 +26,53 @@ public class DatasetOrchestrator {
 
 	public DatasetOrchestrator(String address) {
 		this.datasetEndpoint = address;
-		//this.usrprocessor = new UserQueryProcessor();
+		this.usrQueryExecutor = new UserQueryExecutor();
 		this.queryResults = new ConcurrentHashMap<List<String>,QueryResult>();
 	}
 	
 	public Map<List<String>, QueryResult> processQuery(String queryString){
 		List<List<String>> originalResults = usrQueryExecutor.queryEndpoint(datasetEndpoint, queryString);
 		
-		List<String> processorNames = this.listOfQueryProcessors();
+		List<String> qExecutorNames = Config.loadQueryExecutors(datasetEndpoint);
 		
-		for(String sprocessor : processorNames){
-			this.doStuff(sprocessor, originalResults);
+		for(String qexecutor : qExecutorNames){
+			this.processMapReduce(qexecutor, originalResults);
 		}
 		
 		return this.queryResults;
 		
 	}
 
-	private void doStuff(String sprocessor, List<List<String>> originalResults) {
-		// TODO Auto-generated method stub
-		
+	private void processMapReduce(String executorType, List<List<String>> originalResults) {
+		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
+        List<Future<QueryResult>> temporaryResults = new ArrayList<>();
+		for(List<String> resultItem : originalResults){
+			IQueryExecutor processor = QueryExecutorFactory.createQueryExecutor(executorType, datasetEndpoint, resultItem);
+			temporaryResults.add(executor.submit(processor));
+//			System.out.println(k++);
+		}
+		for(Future<QueryResult> future : temporaryResults)
+        {
+              try
+              {
+            	  QueryResult queryAnswer = future.get();
+            	  this.queryResults.merge(
+            			  queryAnswer.getResult(), 
+            			  queryAnswer, 
+            			  (oldVal, newVal) -> new QueryResult(queryAnswer.getResult(), newVal.getAdditionalInfo().add(oldVal.getAdditionalInfo()) ));
+            	  
+              } 
+              catch (InterruptedException | ExecutionException e) 
+              {
+                  e.printStackTrace();
+              }
+          }
+
+		executor.shutdown();
 	}
 
-	private List<String> listOfQueryProcessors() {
-		// TODO Auto-generated method stub
-		return null;
+	public String generateQuery(String query) {
+		return "";
 	}
 
 }

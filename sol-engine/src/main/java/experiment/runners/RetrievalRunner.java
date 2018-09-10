@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import solengine.frontier.EngineInterface;
+import solengine.utils.Config;
 import solengine.utils.Storage;
 import solengine.utils.Vocabulary;
 
@@ -13,6 +14,8 @@ import solengine.utils.Vocabulary;
  * now with several types of processors
  * **********************************************************************************************************/
 public class RetrievalRunner {
+	
+	static int limit = Config.searchSize();
 
 	public static void main(String[] args) {
 
@@ -30,7 +33,7 @@ public class RetrievalRunner {
 			
 			long startMicro = System.currentTimeMillis();
 			
-			system.processOnDatasets(queryWithoutOffset2(), datasetAddresses, i);
+			system.processOnDatasets(queryWithoutOffset2(), datasetAddresses, limit, i);
 			
 			long elapsedTimeMicro = System.currentTimeMillis() - startMicro;
 			long elapsedTimeTotal = System.currentTimeMillis() - start;

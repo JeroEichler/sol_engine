@@ -7,8 +7,6 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QueryParseException;
 import org.apache.jena.query.Syntax;
 
-import solengine.utils.Vocabulary;
-
 /* ***************************************************************************************************************
  * Class that analyze and extract information from a given query string.
  * 
@@ -24,19 +22,21 @@ public class QueryAnalyser {
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
 		List<String> vars = query.getResultVars();
 		
-		//for(String var :vars){
+//		for(String var :vars){
 //			System.out.println(var);
-		//}
+//		}
 		
 //		System.out.println("-----------------");
 		
 		return vars;
 	}
 	
-	@SuppressWarnings("unused")
 	public static boolean isQueryValid(String queryString) {
 		try {
-			Query query = QueryFactory.create(queryString, Syntax.syntaxARQ);
+			if(queryString == null || queryString.length() == 0) {
+				return false;
+			}
+			QueryFactory.create(queryString, Syntax.syntaxARQ);
 		}
 		catch(QueryParseException e) {
 			return false;
@@ -44,11 +44,18 @@ public class QueryAnalyser {
 		return true;
 	}
 	
-	//TODO if query has already the limit clause
-	public static String limitQuery(String queryString, int step) {
-		queryString = queryString + "LIMIT " + Vocabulary.searchResultsSize 
-                + " OFFSET " +Vocabulary.searchResultsSize * step + " "
+	//TODO what happens if query has already the limit clause
+	public static String limitQuery(String queryString, int limitValue) {
+		queryString = queryString + " LIMIT " + limitValue
                 ;
+		return queryString;
+	}
+	
+	//TODO what happens if query has already the limit clause
+	public static String limitQueryWithOffset(String queryString, int limitValue, int stepValue) {
+		queryString = limitQuery(queryString, limitValue)
+				+ " OFFSET " +limitValue * stepValue + " "
+				;
 		return queryString;
 	}
 

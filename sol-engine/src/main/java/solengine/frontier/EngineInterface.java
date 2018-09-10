@@ -22,9 +22,11 @@ public class EngineInterface {
 		return datasetAddresses;
 	}
 
-	public Map<List<String>, QueryResult>  processOnDatasets(String query, List<String> addresses, int step) {
+	//TODO aggregating multiple dataset
+	//today, it is returning only the first
+	public Map<List<String>, QueryResult> processOnDatasets(String query, List<String> addresses, int limit, int step) {
+		query = QueryAnalyser.limitQueryWithOffset(query, limit, step);
 		if(QueryAnalyser.isQueryValid(query)) {
-			query = QueryAnalyser.limitQuery(query, step);
 			this.datasets = this.initDatasetOrchestrator(addresses);
 
 			for(DatasetOrchestrator datasetOrchestrator : datasets){
@@ -36,6 +38,23 @@ public class EngineInterface {
 			return new ConcurrentHashMap<List<String>,QueryResult>();
 		}
 		return null;
+	}
+	
+	public List<String> createQueries(String query, List<String> addresses) {
+		if(QueryAnalyser.isQueryValid(query)) {
+			List<String> results = new ArrayList<String>();
+			
+			this.datasets = this.initDatasetOrchestrator(addresses);
+
+			for(DatasetOrchestrator datasetOrchestrator : datasets){
+				String newQuery = datasetOrchestrator.generateQuery(query);
+				results.add(newQuery);
+			}
+			return results;
+		}
+		else {
+			return new ArrayList<String>();
+		}
 	}
 
 	private List<DatasetOrchestrator> initDatasetOrchestrator(List<String> addresses){
