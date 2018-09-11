@@ -2,6 +2,9 @@ package solengine.queryexecution;
 
 import java.util.List;
 
+import solengine.queryexecution.generic.SameAsSurprisingObservationQE;
+import solengine.queryexecution.generic.SeeAlsoSurprisingObservationQE;
+
 /* ***************************************************************************************************************
  * Class that encapsulates the creation of a IQueryExecutor object.
  * 
@@ -27,21 +30,15 @@ public class QueryExecutorFactory {
 //		if(type.equals("AnalogyQueryProcessor4")){
 //			return new AnalogyQueryProcessor4(endpoint, subject);
 //		}
-//		if(type.equals("BasicQueryProcessor")){
-//			return new BasicQueryProcessor(endpoint, subject);
-//		}
 //		if(type.equals("SimilarityQueryProcessor")){
 //			return new SimilarityQueryProcessor(endpoint, subject);
 //		}
-//		if(type.equals("SimpleBasicQueryProcessor")){
-//			return new SimpleBasicQueryProcessor(endpoint, subject);
-//		}
-//		if(type.equals("SurprisingObservationQueryProcessor")){
-//			return new SurprisingObservationQueryProcessor(endpoint, subject);
-//		}
-//		if(type.equals("SurprisingObservationQueryProcessor2")){
-//			return new SurprisingObservationQueryProcessor2(endpoint, subject);
-//		}
+		if(type.equals("SeeAlsoSurprisingObservation")){
+			return new SeeAlsoSurprisingObservationQE(endpoint, subject);
+		}
+		if(type.equals("SameAsSurprisingObservation")){
+			return new SameAsSurprisingObservationQE(endpoint, subject);
+		}
 //		
 //
 //		if(type.equals("MusicAnalogyQueryProcessor")){
@@ -63,6 +60,13 @@ public class QueryExecutorFactory {
 //		}
 //		else if(type.equals("TourismSurprisingObservationQueryProcessor")){
 //			return new TourismSurprisingObservationQueryProcessor(endpoint, subject);
+//		}
+		
+//		if(type.equals("BasicQueryExecutor")){
+//			return new BasicQueryExecutor(endpoint, subject);
+//		}
+//		if(type.equals("SimpleBasicQueryExecutor")){
+//			return new SimpleBasicQueryExecutor(endpoint, subject);
 //		}
 		
 		return null;

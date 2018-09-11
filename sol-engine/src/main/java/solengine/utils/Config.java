@@ -57,8 +57,8 @@ public class Config {
 		}
 		
 		if(types.contains("Surprise")) {	
-			processors.add("SurprisingObservationQueryProcessor");
-			processors.add("SurprisingObservationQueryProcessor2");	
+			processors.add("SeeAlsoSurprisingObservation");
+			processors.add("SameAsSurprisingObservation");	
 			
 			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
 				if(domains.contains("Music")) {
