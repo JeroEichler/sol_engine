@@ -15,6 +15,7 @@ import solengine.model.QueryResult;
 
 public class Storage {
 	
+	//deprecated
 	public static void save(String fileName, Map<List<String>,QueryResult> results){
 		try {
 			File file  = new File(fileName);

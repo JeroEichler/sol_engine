@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Properties;
 
 public class Config {
+
+	public static final String baseFolder = "C:/solengine/experiment/";
+	public static final String baseFolder2 = "C://solengine//experiment//";
+	
+	public static final String rdfFormat = "N-TRIPLES";
 	
 	private static final Properties prop = buildProperties();
 	
@@ -34,40 +39,40 @@ public class Config {
 	}
 	
 	public static List<String> loadQueryExecutors(String datasetEndpoint) {
-		List<String> domains = domains();
+//		List<String> domains = domains();
 		List<String> types = Config.buildList(prop.getProperty("QETypes"));
 		
 		List<String> processors = new ArrayList<>();	
 		
-		if(types.contains("Analogy")) {			
-			processors.add("AnalogyQueryProcessor");
-			processors.add("AnalogyQueryProcessor2");
-			processors.add("AnalogyQueryProcessor4");
-			
-			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
-				if(domains.contains("Music")) {
-					processors.add("MusicAnalogyQueryProcessor");	
-				}
-				if(domains.contains("Tourism")) {
-					processors.add("TourismAnalogyQueryProcessor");
-					processors.add("TourismAnalogyQueryProcessor2");
-					processors.add("TourismAnalogyQueryProcessor3");
-				}
-			}
-		}
+//		if(types.contains("Analogy")) {			
+//			processors.add("AnalogyQueryProcessor");
+//			processors.add("AnalogyQueryProcessor2");
+//			processors.add("AnalogyQueryProcessor4");
+//			
+//			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
+//				if(domains.contains("Music")) {
+//					processors.add("MusicAnalogyQueryProcessor");	
+//				}
+//				if(domains.contains("Tourism")) {
+//					processors.add("TourismAnalogyQueryProcessor");
+//					processors.add("TourismAnalogyQueryProcessor2");
+//					processors.add("TourismAnalogyQueryProcessor3");
+//				}
+//			}
+//		}
 		
 		if(types.contains("Surprise")) {	
-			processors.add("SeeAlsoSurprisingObservation");
+//			processors.add("SeeAlsoSurprisingObservation");
 			processors.add("SameAsSurprisingObservation");	
 			
-			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
-				if(domains.contains("Music")) {
-					processors.add("MusicSurprisingObservationQueryProcessor");
-				}
-				if(domains.contains("Tourism")) {
-					processors.add("TourismSurprisingObservationQueryProcessor");
-				}
-			}
+//			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
+//				if(domains.contains("Music")) {
+//					processors.add("MusicSurprisingObservationQueryProcessor");
+//				}
+//				if(domains.contains("Tourism")) {
+//					processors.add("TourismSurprisingObservationQueryProcessor");
+//				}
+//			}
 		}
 
 //		not serendipitously

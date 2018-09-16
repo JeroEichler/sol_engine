@@ -1,13 +1,13 @@
 package solengine.model;
 
 import java.io.Serializable;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.jena.rdf.model.*;
+
+import solengine.utils.ModelConverter;
 
 
 /* ***************************************************************************************************************
@@ -33,7 +33,7 @@ public class QueryResult implements Serializable {
 	public QueryResult(List<String> result, Model model){
 		this.result = result;
 //		this.additionalInfo = model;
-		this.model = this.modelToString(model);
+		this.model = ModelConverter.modelToString(model);
 	}
 	
 	public List<String> getResult(){
@@ -42,22 +42,9 @@ public class QueryResult implements Serializable {
 	
 
 	
-	public String modelToString(Model model){
-		StringWriter sw = new StringWriter();
-		model.write(sw, "N-TRIPLES");
-		String temp = sw.toString();
-		return temp;
-	}
-	
-	public Model stringTomodel(String model){
-		StringReader sr = new StringReader(model);
-		Model loadedModel = ModelFactory.createDefaultModel();
-		loadedModel.read(sr, null, "N-TRIPLES");
-		return loadedModel;
-	}
 	
 	public Model getAdditionalInfo(){
-		return this.stringTomodel(model);
+		return ModelConverter.stringTomodel(model);
 	}
 	
 	public List<String> getObjects(){
