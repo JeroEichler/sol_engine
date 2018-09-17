@@ -2,7 +2,6 @@ package solengine.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -38,49 +37,10 @@ public class Config {
 		return prop.getProperty("rdfFormat");
 	}
 	
-	public static List<String> loadQueryExecutors(String datasetEndpoint) {
-//		List<String> domains = domains();
+	public static List<String> loadQueryExecutorGroups() {
 		List<String> types = Config.buildList(prop.getProperty("QETypes"));
-		
-		List<String> processors = new ArrayList<>();	
-		
-//		if(types.contains("Analogy")) {			
-//			processors.add("AnalogyQueryProcessor");
-//			processors.add("AnalogyQueryProcessor2");
-//			processors.add("AnalogyQueryProcessor4");
-//			
-//			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
-//				if(domains.contains("Music")) {
-//					processors.add("InfluenceAnalogy");	
-//				}
-//				if(domains.contains("Tourism")) {
-//					processors.add("ArtworkAnalogy");
-//					processors.add("CollectionAnalogy");
-//					processors.add("VisitorAnalogy");
-//				}
-//			}
-//		}
-		
-		if(types.contains("Surprise")) {	
-//			processors.add("SeeAlsoSurprisingObservation");
-			processors.add("SameAsSurprisingObservation");	
 			
-//			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
-//				if(domains.contains("Music")) {
-//					processors.add("AssociationSurprisingObservation");
-//				}
-//				if(domains.contains("Tourism")) {
-//					processors.add("BuildingSurprisingObservationQE");
-//				}
-//			}
-		}
-
-//		not serendipitously
-//		processors.add("BasicQueryProcessor");
-//		processors.add("SimilarityQueryProcessor");
-//		processors.add("SimpleBasicQueryProcessor");
-			
-		return processors;
+		return types;
 	}
 	
 

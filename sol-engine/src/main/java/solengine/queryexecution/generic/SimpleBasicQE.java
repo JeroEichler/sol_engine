@@ -2,9 +2,6 @@ package solengine.queryexecution.generic;
 
 import java.util.List;
 
-import solengine.queryexecution.QueryExecutor;
-import solengine.utils.Vocabulary;
-
 /* ***************************************************************************************************************
  * Class that customize the QueryExecutor to construct statements of the form
  * 		<subject> <predicate> <object>
@@ -15,24 +12,20 @@ import solengine.utils.Vocabulary;
  * results.
  * 
  *****************************************************************************************************************/
-public class BasicQueryExecutor extends QueryExecutor{
+public class SimpleBasicQE extends BasicQE{
 	
-	public BasicQueryExecutor(String endpoint, List<String> param) {
+	public SimpleBasicQE(String endpoint, List<String> param) {
 		this.endpoint = endpoint;
 		this.subject = this.getRandomResource(param);
 		this.querySolution = param;
 		this.queryString  = 
-				"CONSTRUCT {<"+subject+"> <"+Vocabulary.Rdf_TypeProperty+"> ?object}" +
+				"CONSTRUCT {<"+subject+"> ?property ?object}" +
 				"	WHERE{" +
-				"		<"+subject+"> <"+Vocabulary.Rdf_TypeProperty+"> ?object." +
-				"		filter (!EXISTS{" +
-				"			select distinct ?object where { ?a <"+Vocabulary.Rdfs_SubclassOfProperty+"> ?object} " +
-				"		})" +
+				"		<"+subject+"> ?property ?object." +
+				"		filter (!regex(?property, 'http://dbpedia.org/ontology/wikiPage'))" +
 				"	}"
 	            ;
 		
 	}
-	
-	protected BasicQueryExecutor() {}
 
 }

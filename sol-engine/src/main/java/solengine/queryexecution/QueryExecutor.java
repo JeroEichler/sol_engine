@@ -11,7 +11,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
 import solengine.model.QueryResult;
-import solengine.queryexecution.generic.SimpleBasicQueryExecutor;
+import solengine.queryexecution.generic.SimpleBasicQE;
 import solengine.utils.Config;
 import solengine.utils.ControlObjects;
 
@@ -58,7 +58,7 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
 
 
 		private boolean isBasicType() {
-			boolean outcome = this.getClass().isAssignableFrom(SimpleBasicQueryExecutor.class);
+			boolean outcome = this.getClass().isAssignableFrom(SimpleBasicQE.class);
 			return outcome;
 		}
 

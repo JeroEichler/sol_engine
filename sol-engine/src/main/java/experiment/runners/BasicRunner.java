@@ -21,7 +21,7 @@ public class BasicRunner {
 
 		System.out.println("Guten Morgen!");
 		
-		for(String item : Config.loadQueryExecutors(Vocabulary.DBpediaEndpoint)){
+		for(String item : Config.loadQueryExecutorGroups()){
 			System.out.println(item);
 		}
 		

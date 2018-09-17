@@ -12,8 +12,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import solengine.model.QueryResult;
 import solengine.queryexecution.IQueryExecutor;
 import solengine.queryexecution.QueryExecutorFactory;
+import solengine.queryexecution.QueryExecutorTypeEnum;
 import solengine.queryexecution.UserQueryExecutor;
-import solengine.utils.Config;
 import solengine.utils.Vocabulary;
 
 public class DatasetOrchestrator {
@@ -33,9 +33,9 @@ public class DatasetOrchestrator {
 	public Map<List<String>, QueryResult> processQuery(String queryString){
 		List<List<String>> originalResults = usrQueryExecutor.queryEndpoint(datasetEndpoint, queryString);
 		
-		List<String> qExecutorNames = Config.loadQueryExecutors(datasetEndpoint);
+		List<QueryExecutorTypeEnum> qExecutorNames = DatasetOrchestConfigurator.buildQueryExecutorList(datasetEndpoint);
 		
-		for(String qexecutor : qExecutorNames){
+		for(QueryExecutorTypeEnum qexecutor : qExecutorNames){
 			this.processMapReduce(qexecutor, originalResults);
 		}
 		
@@ -43,7 +43,7 @@ public class DatasetOrchestrator {
 		
 	}
 
-	private void processMapReduce(String executorType, List<List<String>> originalResults) {
+	private void processMapReduce(QueryExecutorTypeEnum executorType, List<List<String>> originalResults) {
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
         List<Future<QueryResult>> temporaryResults = new ArrayList<>();
 		for(List<String> resultItem : originalResults){
