@@ -51,12 +51,12 @@ public class Config {
 //			
 //			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
 //				if(domains.contains("Music")) {
-//					processors.add("MusicAnalogy");	
+//					processors.add("InfluenceAnalogy");	
 //				}
 //				if(domains.contains("Tourism")) {
-//					processors.add("TourismAnalogyQueryProcessor");
-//					processors.add("TourismAnalogyQueryProcessor2");
-//					processors.add("TourismAnalogyQueryProcessor3");
+//					processors.add("ArtworkAnalogy");
+//					processors.add("CollectionAnalogy");
+//					processors.add("VisitorAnalogy");
 //				}
 //			}
 //		}
@@ -67,10 +67,10 @@ public class Config {
 			
 //			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
 //				if(domains.contains("Music")) {
-//					processors.add("MusicSurprisingObservation");
+//					processors.add("AssociationSurprisingObservation");
 //				}
 //				if(domains.contains("Tourism")) {
-//					processors.add("TourismSurprisingObservationQueryProcessor");
+//					processors.add("BuildingSurprisingObservationQE");
 //				}
 //			}
 		}

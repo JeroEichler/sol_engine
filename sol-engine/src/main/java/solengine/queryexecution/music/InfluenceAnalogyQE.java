@@ -9,8 +9,8 @@ import solengine.utils.Vocabulary;
  * Class that customize the QueryExecutor to construct statements of the form
  * 		<subject> <rdf:seeAlso> <resource>
  * when exists
- * 		<entity> <dbp:Influenced> <resource> and
- * 		<subject> <dbp:Influenced> <resource>
+ * 		<entity> <dbp:influenced> <resource> and
+ * 		<subject> <dbp:influenced> <resource>
  * for any entity <entity>
  * 
  *****************************************************************************************************************/

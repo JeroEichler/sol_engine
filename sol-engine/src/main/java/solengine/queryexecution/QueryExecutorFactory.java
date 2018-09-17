@@ -2,10 +2,9 @@ package solengine.queryexecution;
 
 import java.util.List;
 
-import solengine.queryexecution.generic.SameAsSurprisingObservationQE;
-import solengine.queryexecution.generic.SeeAlsoSurprisingObservationQE;
-import solengine.queryexecution.music.AssociationSurprisingObservationQE;
-import solengine.queryexecution.music.InfluenceAnalogyQE;
+import solengine.queryexecution.generic.*;
+import solengine.queryexecution.music.*;
+import solengine.queryexecution.tourism.*;
 
 /* ***************************************************************************************************************
  * Class that encapsulates the creation of a IQueryExecutor object.
@@ -43,26 +42,26 @@ public class QueryExecutorFactory {
 		}
 		
 
-		if(type.equals("MusicAnalogy")){
+		if(type.equals("InfluenceAnalogy")){
 			return new InfluenceAnalogyQE(endpoint, subject);
 		}
-		if(type.equals("MusicSurprisingObservation")){
+		if(type.equals("AssociationSurprisingObservation")){
 			return new AssociationSurprisingObservationQE(endpoint, subject);
 		}
-//		
-//		
-//		if(type.equals("TourismAnalogyQueryProcessor")){
-//			return new TourismAnalogyQueryProcessor(endpoint, subject);
-//		}
-//		if(type.equals("TourismAnalogyQueryProcessor2")){
-//			return new TourismAnalogyQueryProcessor2(endpoint, subject);
-//		}
-//		if(type.equals("TourismAnalogyQueryProcessor3")){
-//			return new TourismAnalogyQueryProcessor3(endpoint, subject);
-//		}
-//		else if(type.equals("TourismSurprisingObservationQueryProcessor")){
-//			return new TourismSurprisingObservationQueryProcessor(endpoint, subject);
-//		}
+		
+		
+		if(type.equals("ArtworkAnalogy")){
+			return new ArtworkAnalogyQE(endpoint, subject);
+		}
+		if(type.equals("CollectionAnalogy")){
+			return new CollectionAnalogyQE(endpoint, subject);
+		}
+		if(type.equals("VisitorAnalogy")){
+			return new VisitorAnalogyQE(endpoint, subject);
+		}
+		else if(type.equals("BuildingSurprisingObservation")){
+			return new BuildingSurprisingObservationQE(endpoint, subject);
+		}
 		
 //		if(type.equals("BasicQueryExecutor")){
 //			return new BasicQueryExecutor(endpoint, subject);
