@@ -4,6 +4,8 @@ import java.util.List;
 
 import solengine.queryexecution.generic.SameAsSurprisingObservationQE;
 import solengine.queryexecution.generic.SeeAlsoSurprisingObservationQE;
+import solengine.queryexecution.music.AssociationSurprisingObservationQE;
+import solengine.queryexecution.music.InfluenceAnalogyQE;
 
 /* ***************************************************************************************************************
  * Class that encapsulates the creation of a IQueryExecutor object.
@@ -39,14 +41,14 @@ public class QueryExecutorFactory {
 		if(type.equals("SameAsSurprisingObservation")){
 			return new SameAsSurprisingObservationQE(endpoint, subject);
 		}
-//		
-//
-//		if(type.equals("MusicAnalogyQueryProcessor")){
-//			return new MusicAnalogyQueryProcessor(endpoint, subject);
-//		}
-//		if(type.equals("MusicSurprisingObservationQueryProcessor")){
-//			return new MusicSurprisingObservationQueryProcessor(endpoint, subject);
-//		}
+		
+
+		if(type.equals("MusicAnalogy")){
+			return new InfluenceAnalogyQE(endpoint, subject);
+		}
+		if(type.equals("MusicSurprisingObservation")){
+			return new AssociationSurprisingObservationQE(endpoint, subject);
+		}
 //		
 //		
 //		if(type.equals("TourismAnalogyQueryProcessor")){

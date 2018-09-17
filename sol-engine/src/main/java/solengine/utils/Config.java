@@ -51,7 +51,7 @@ public class Config {
 //			
 //			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
 //				if(domains.contains("Music")) {
-//					processors.add("MusicAnalogyQueryProcessor");	
+//					processors.add("MusicAnalogy");	
 //				}
 //				if(domains.contains("Tourism")) {
 //					processors.add("TourismAnalogyQueryProcessor");
@@ -67,7 +67,7 @@ public class Config {
 			
 //			if(datasetEndpoint == Vocabulary.DBpediaEndpoint) {
 //				if(domains.contains("Music")) {
-//					processors.add("MusicSurprisingObservationQueryProcessor");
+//					processors.add("MusicSurprisingObservation");
 //				}
 //				if(domains.contains("Tourism")) {
 //					processors.add("TourismSurprisingObservationQueryProcessor");

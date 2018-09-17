@@ -24,7 +24,7 @@ public class NewStorage {
 			NewStorage.saveSingleResult(title, result);
 			savedTitles.add(title);
 		}
-		NewStorage.saveEntity("progressX", savedTitles);
+		NewStorage.saveProgress("progressX", savedTitles);
 	}
 	
 	public static void saveSingleResult(String fileName, QueryResult result){		
@@ -34,9 +34,10 @@ public class NewStorage {
 	
 
 	
-	public static void savProgress(String fileName, List<String> results){		
-		QueryResultDto exportedResult = ModelConverter.convert(result);		
-		NewStorage.saveEntity(fileName, exportedResult);
+	public static void saveProgress(String fileName, List<String> results){	
+		List<String> savedList = NewStorage.readProgress();
+		savedList.addAll(results);
+		NewStorage.saveEntity("progressX", savedList);
 	}
 	
 	private static void saveEntity(String fileName, Object entity) {		
@@ -55,14 +56,14 @@ public class NewStorage {
 		
 	}
 	
-	public static List<String> readProgress(String folder, String genre) {
-		List<String> movieList = new ArrayList<String>();
+	public static List<String> readProgress() {
+		List<String> savedList = new ArrayList<String>();
 		
 		try {
 			String[] tempRead = mapper.readValue(new File(
 					Config.baseFolder2 +
-					".json"), String[].class);
-			movieList.addAll(Arrays.asList(tempRead));
+					"progressX.json"), String[].class);
+			savedList.addAll(Arrays.asList(tempRead));
 		} 
 		catch (JsonParseException e) {
 			e.printStackTrace();
@@ -73,7 +74,7 @@ public class NewStorage {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		return movieList;
+		return savedList;
 	}
 
 }
