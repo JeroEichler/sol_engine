@@ -40,9 +40,6 @@ public class QueryResult implements Serializable {
 		return this.result;
 	}
 	
-
-	
-	
 	public Model getAdditionalInfo(){
 		return ModelConverter.stringTomodel(model);
 	}
@@ -54,76 +51,4 @@ public class QueryResult implements Serializable {
 				.collect(Collectors.toCollection(ArrayList<String>::new));
 		return resourceObjectsURI;
 	}
-	
-	public String toString(){
-		String temp = printResult(result);
-		temp = temp+"\n"+printModel(this.getAdditionalInfo());
-		return temp;
-	}
-	
-	public void printString(){
-		System.out.println(result);
-		this.printModel2(this.getAdditionalInfo());
-	}
-	
-
-
-	public void printModel2(Model rs){
-		StmtIterator iter = rs.listStatements();
-
-		// print out the predicate, subject and object of each statement
-		while (iter.hasNext()) {
-		    Statement stmt      = iter.nextStatement();  // get next statement
-		    Resource  subject   = stmt.getSubject();     // get the subject
-		    Property  predicate = stmt.getPredicate();   // get the predicate
-		    RDFNode   object    = stmt.getObject();      // get the object
-
-		    System.out.print(subject.toString());
-		    System.out.print(" " + predicate.toString() + " ");
-		    if (object instanceof Resource) {
-		       System.out.print(object.toString());
-		    } else {
-		        // object is a literal
-		        System.out.print(" \"" + object.toString() + "\"");
-		    }
-
-		    System.out.println(" .");
-		}
-	}
-	
-	public String printModel(Model rs){
-		StmtIterator iter = rs.listStatements();
-		String temp = "";
-
-		// print out the predicate, subject and object of each statement
-		while (iter.hasNext()) {
-		    Statement stmt      = iter.nextStatement();  // get next statement
-		    Resource  subject   = stmt.getSubject();     // get the subject
-		    Property  predicate = stmt.getPredicate();   // get the predicate
-		    RDFNode   object    = stmt.getObject();      // get the object
-
-		    temp = temp+subject.toString()+" " + predicate.toString() + " ";
-		    if (object instanceof Resource) {
-		    	temp = temp+object.toString();
-		    } else {
-		        // object is a literal
-		    	temp = temp+" \"" + object.toString() + "\"";
-		    }
-
-		    temp = temp+" .\n";
-		}
-		return temp;
-	}
-	
-
-	
-	public String printResult(List<String> result){
-		String temp = "";
-
-		for(String resultItem : result){
-			temp = temp + resultItem + " ";
-		}
-		return temp;
-	}
-
 }
