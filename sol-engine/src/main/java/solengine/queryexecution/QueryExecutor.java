@@ -23,43 +23,43 @@ import solengine.utils.ControlObjects;
 public abstract class QueryExecutor extends QueryElement implements IQueryExecutor {
 	
 	//Common Properties
-		protected String endpoint, queryString, subject;
-		protected List<String> querySolution;
+	protected String endpoint, queryString, subject;
+	protected List<String> querySolution;
 
 
-		/* ***************************************************************************************************************
-		 * Function that invoke a sparql query call and returns the query results.
-		 * 
-		 * Parameters: void
-		 * Returns: sol_tool_1_4.QueryResult.
-		 * Obs.: For log and debug only.
-		 *****************************************************************************************************************/
-		@Override
-		public QueryResult call() throws Exception {
-			if(Config.queryExecutorLimited() || this.isBasicType()) {
-				queryString = queryString +" LIMIT 2 ";
-			}
-			Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
-	        try ( QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query) ) {
-	            ((QueryEngineHTTP)qexec).addParam("timeout", "10000") ;
+	/* ***************************************************************************************************************
+	 * Function that invoke a sparql query call and returns the query results.
+	 * 
+	 * Parameters: void
+	 * Returns: sol_tool_1_4.QueryResult.
+	 * Obs.: For log and debug only.
+	 *****************************************************************************************************************/
+	@Override
+	public QueryResult call() throws Exception {
+		if(Config.queryExecutorLimited() || this.isBasicType()) {
+			queryString = queryString +" LIMIT 2 ";
+		}
+		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
+        try ( QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query) ) {
+            ((QueryEngineHTTP)qexec).addParam("timeout", "10000") ;
 
-	    		// create the query result
-	            Model model = qexec.execConstruct();
-	            QueryResult qr = new QueryResult(querySolution, model);
+    		// create the query result
+            Model model = qexec.execConstruct();
+            QueryResult qr = new QueryResult(querySolution, model);
 //	            Convert.printModel2(model);
-	            return qr;
-	        } 
-	        catch (Exception e) {
+            return qr;
+        } 
+        catch (Exception e) {
 //	            e.printStackTrace();
-	            System.out.println("..."+querySolution.toString());
-	            return ControlObjects.getEmptyQueryResult();
-	        }
-		}
+            System.out.println("..."+querySolution.toString());
+            return ControlObjects.getEmptyQueryResult();
+        }
+	}
 
 
-		private boolean isBasicType() {
-			boolean outcome = this.getClass().isAssignableFrom(SimpleBasicQE.class);
-			return outcome;
-		}
+	private boolean isBasicType() {
+		boolean outcome = this.getClass().isAssignableFrom(SimpleBasicQE.class);
+		return outcome;
+	}
 
 }
