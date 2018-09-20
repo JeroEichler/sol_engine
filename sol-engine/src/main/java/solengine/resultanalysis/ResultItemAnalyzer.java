@@ -16,16 +16,16 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 import solengine.utils.ControlObjects;
 import solengine.utils.Vocabulary;
 
 public class ResultItemAnalyzer implements Callable<String> {
 
 	private String endpoint = Vocabulary.DBpediaEndpoint;
-	private QueryResult result;
+	private QueryResponse result;
 
-	public ResultItemAnalyzer(QueryResult resultItem) {
+	public ResultItemAnalyzer(QueryResponse resultItem) {
 		this.result = resultItem;
 	}
 
@@ -34,14 +34,14 @@ public class ResultItemAnalyzer implements Callable<String> {
 		if(result.equals(ControlObjects.getEmptyQueryResult())){
 			return "problem reading resource";
 		}
-		//extracting labels from QueryResult.result
+		//extracting labels from QueryResponse.result
 		List<String> queryResult = result.getResult();
 		List<String> resultLabels = new ArrayList<String>();
 		for(String queryResultItem : queryResult){
 			resultLabels.addAll(this.getDataAboutResource(queryResultItem));
 		}
 
-		//extracting labels from QueryResult.additionalInfo
+		//extracting labels from QueryResponse.additionalInfo
 		List<String> additionalInfoResults = result.getObjects();
 		List<String> additionalInfoLabels = new ArrayList<String>();
 		for(String queryResultItem : additionalInfoResults){

@@ -15,9 +15,10 @@ public class QueryExecutorFactory {
 	/* ***************************************************************************************************************
 	 * Function that encapsulates the creation of a IQueryExecutor object based on its type parameter.
 	 * 
-	 * Parameters:	(1) String type; //type of the desired IQueryQueryExecutor
-	 * 				(2) String endpoint;  //dataset endpoint address
-	 * 				(3) String subject  //subject parameter of the query.
+	 * Parameters:	(1) Enum type; 			//type of the desired IQueryQueryExecutor
+	 * 				(2) String endpoint;  	//dataset endpoint address
+	 * 				(3) String subject  	//subject parameter of the query.
+	 * 
 	 * Returns: solengine.queryexecution.IQueryExecutor.
 	 * 
 	 *****************************************************************************************************************/

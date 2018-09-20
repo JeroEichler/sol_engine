@@ -7,17 +7,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 
 
 public class ResultAnalysisOrchestrator {
 
-	public List<String> processAnalysis(List<QueryResult>  results){
+	public List<String> processAnalysis(List<QueryResponse>  results){
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
         List<Future<String>> temporaryResults = new ArrayList<>();
         List<String> analysisResults = new ArrayList<>();
 //		int k =0;
-		for(QueryResult resultItem : results){
+		for(QueryResponse resultItem : results){
 			ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem);
 			temporaryResults.add(executor.submit(analyzer));
 //			System.out.println(k++);

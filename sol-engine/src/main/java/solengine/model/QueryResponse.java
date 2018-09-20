@@ -13,26 +13,22 @@ import solengine.utils.ModelConverter;
 /* ***************************************************************************************************************
  * Class that augments a query result with additional information 
  * 
- * 
- * For now, considering only a single column result
- * TODO: reconsider the name of the class.
+ * Properties:	(1) List<String> result; 		// represents the result of a SPARQL query,
+ * 												// it is a list because the result of a SELECT SPARQL query may be
+ * 												// composed of a set of columns.
+ * 				(2) Model getAdditionalInfo;  	// represents a RDF data graph that provides additional information
+ * 												// about the result property.
  *****************************************************************************************************************/
 
-public class QueryResult implements Serializable {
+public class QueryResponse implements Serializable {
 	
 	private static final long serialVersionUID = 5743156082940385418L;
 	
 	List<String> result;
 	String model;
 	
-	public QueryResult(List<String> result){
+	public QueryResponse(List<String> result, Model model){
 		this.result = result;
-//		this.additionalInfo = ModelFactory.createDefaultModel();
-	}
-	
-	public QueryResult(List<String> result, Model model){
-		this.result = result;
-//		this.additionalInfo = model;
 		this.model = ModelConverter.modelToString(model);
 	}
 	

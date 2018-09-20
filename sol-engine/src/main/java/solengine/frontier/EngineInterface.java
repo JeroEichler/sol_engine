@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import solengine.datasetorchestration.DatasetOrchestrator;
 import solengine.model.QueryAnalyser;
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 import solengine.utils.Vocabulary;
 
 public class EngineInterface {
@@ -24,18 +24,18 @@ public class EngineInterface {
 
 	//TODO aggregating multiple dataset
 	//today, it is returning only the first
-	public Map<List<String>, QueryResult> processOnDatasets(String query, List<String> addresses, int limit, int step) {
+	public Map<List<String>, QueryResponse> processOnDatasets(String query, List<String> addresses, int limit, int step) {
 		query = QueryAnalyser.limitQueryWithOffset(query, limit, step);
 		if(QueryAnalyser.isQueryValid(query)) {
 			this.datasets = this.initDatasetOrchestrator(addresses);
 
 			for(DatasetOrchestrator datasetOrchestrator : datasets){
-				Map<List<String>, QueryResult> tableResults = datasetOrchestrator.processQuery(query);
+				Map<List<String>, QueryResponse> tableResults = datasetOrchestrator.processQuery(query);
 				return tableResults;
 			}
 		}
 		else {
-			return new ConcurrentHashMap<List<String>,QueryResult>();
+			return new ConcurrentHashMap<List<String>,QueryResponse>();
 		}
 		return null;
 	}

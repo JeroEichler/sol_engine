@@ -5,15 +5,15 @@ import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 
 public class ControlObjects {
 	
-	public static QueryResult getEmptyQueryResult(){
+	public static QueryResponse getEmptyQueryResult(){
       List<String> error = new ArrayList<String>();
       error.add("error");
       Model model = ModelFactory.createDefaultModel();
-      QueryResult qx = new QueryResult(error, model);
+      QueryResponse qx = new QueryResponse(error, model);
       return qx;
 	}
 

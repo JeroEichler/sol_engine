@@ -1,5 +1,10 @@
 package solengine.queryexecution;
 
+
+/* ***************************************************************************************************************
+ * Enumerator of all possible QueryExecutor types.
+ * 
+ *****************************************************************************************************************/
 public enum QueryExecutorTypeEnum {
 	
 	// generic

@@ -12,6 +12,13 @@ import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import solengine.model.QueryAnalyser;
 import solengine.utils.ModelIO;
 
+
+/* ***************************************************************************************************************
+ * Class that process a queryString against a endpoint.
+ * 
+ * It is used for processing the user's query.
+ * 
+ *****************************************************************************************************************/
 public class UserQueryExecutor {
 	
 	public List<List<String>> queryEndpoint(String endpoint, String queryString) {
@@ -22,11 +29,9 @@ public class UserQueryExecutor {
             // Execute.
             ResultSet rs = qexec.execSelect();
             List<List<String>> resultsFormatted = ModelIO.formatResultsToString(rs, QueryAnalyser.extractVariables(queryString));
-            //ModelIO.printModel(rs);
             return resultsFormatted;
         } 
         catch (Exception e) {
-//            e.printStackTrace();
         	System.out.println("problem using UserQueryExecutor with queryEndpoint" + e.toString());
         }
 		return null;
