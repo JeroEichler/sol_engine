@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import solengine.frontier.EngineInterface;
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 import solengine.utils.Config;
 import solengine.utils.NewStorage;
 import solengine.utils.Storage;
@@ -40,7 +40,7 @@ public class BasicRunner {
 			
 			long startMicro = System.currentTimeMillis();
 			
-			Map<List<String>, QueryResult> result = system.processOnDatasets(basicQuery(), datasetAddresses, limit, i);
+			Map<List<String>, QueryResponse> result = system.processOnDatasets(basicQuery(), datasetAddresses, limit, i);
 			NewStorage.save(result);
 			
 			long elapsedTimeMicro = System.currentTimeMillis() - startMicro;

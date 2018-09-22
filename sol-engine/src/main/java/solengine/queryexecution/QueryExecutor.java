@@ -10,13 +10,14 @@ import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 import solengine.queryexecution.generic.SimpleBasicQE;
 import solengine.utils.Config;
 import solengine.utils.ControlObjects;
 
 /* ***************************************************************************************************************
  * Abstract class that implements the fundamental behaviour of a QueryExecutor
+ * 
  * 
  * A QueryExecutor has the following properties.
  *****************************************************************************************************************/
@@ -31,11 +32,10 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
 	 * Function that invoke a sparql query call and returns the query results.
 	 * 
 	 * Parameters: void
-	 * Returns: sol_tool_1_4.QueryResult.
-	 * Obs.: For log and debug only.
+	 * Returns: QueryResponse.
 	 *****************************************************************************************************************/
 	@Override
-	public QueryResult call() throws Exception {
+	public QueryResponse call() throws Exception {
 		if(Config.queryExecutorLimited() || this.isBasicType()) {
 			queryString = queryString +" LIMIT 2 ";
 		}
@@ -45,7 +45,7 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
 
     		// create the query result
             Model model = qexec.execConstruct();
-            QueryResult qr = new QueryResult(querySolution, model);
+            QueryResponse qr = new QueryResponse(querySolution, model);
 //	            Convert.printModel2(model);
             return qr;
         } 

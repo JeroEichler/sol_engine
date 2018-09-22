@@ -15,9 +15,9 @@ import org.apache.jena.query.Syntax;
 public class QueryAnalyser {
 
 	/* ***************************************************************************************************************
-	 * Function that extracts the variables of a given query string
-	 * 
-	 *****************************************************************************************************************/
+	* Function that extracts the variables of a given query string.
+	* 
+	*****************************************************************************************************************/
 	public static List<String> extractVariables(String queryString){
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
 		List<String> vars = query.getResultVars();
@@ -31,6 +31,10 @@ public class QueryAnalyser {
 		return vars;
 	}
 	
+	/* ***************************************************************************************************************
+	* Function that evaluates if a query string is valid.
+	* 
+	*****************************************************************************************************************/
 	public static boolean isQueryValid(String queryString) {
 		try {
 			if(queryString == null || queryString.length() == 0) {

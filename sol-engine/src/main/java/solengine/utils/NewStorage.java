@@ -10,16 +10,16 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import solengine.model.QueryResult;
+import solengine.model.QueryResponse;
 import solengine.utils.dto.QueryResultDto;
 
 public class NewStorage {
 
 	static ObjectMapper mapper = MapperFactory.initMapper(); 
 	
-	public static void save(Map<List<String>,QueryResult> results){
+	public static void save(Map<List<String>,QueryResponse> results){
 		List<String> savedTitles = new ArrayList<String>();
-		for(QueryResult result : results.values()) {
+		for(QueryResponse result : results.values()) {
 			String title = StringFormatter.clean(result.getResult());
 			NewStorage.saveSingleResult(title, result);
 			savedTitles.add(title);
@@ -27,7 +27,7 @@ public class NewStorage {
 		NewStorage.saveProgress("progressX", savedTitles);
 	}
 	
-	public static void saveSingleResult(String fileName, QueryResult result){		
+	public static void saveSingleResult(String fileName, QueryResponse result){		
 		QueryResultDto exportedResult = ModelConverter.convert(result);		
 		NewStorage.saveEntity(fileName, exportedResult);
 	}
