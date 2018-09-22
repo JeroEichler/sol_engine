@@ -43,9 +43,7 @@ public abstract class QueryBuilder extends QueryElement implements IQueryBuilder
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
         try ( QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query) ) {
             ((QueryEngineHTTP)qexec).addParam("timeout", "10000") ;
-
-
-
+            
             // Execute.
             ResultSet rs = qexec.execSelect();
             List<String> relevantResources = extractRelevantResources(rs);
