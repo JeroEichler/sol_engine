@@ -19,22 +19,19 @@ import solengine.queryexecution.QueryElement;
 /* ***************************************************************************************************************
  * Abstract class that implements the fundamental behaviour of a QueryBuilder.
  * 
- * A QueryBuilder has the following properties.
+ * A QueryBuilder has the following properties, that ought to be defined by the subclass.
+ * 		(1) String endpoint;  //dataset endpoint address.
+ * 		(2) String queryString; //original query string submitted.
+ * 		(3) String extractionFactor;  //the information retrieved about the query string.
  *****************************************************************************************************************/
 public abstract class QueryBuilder extends QueryElement implements IQueryBuilder {
 
 	//Common Properties
-	protected String endpoint, queryString;
-	
-	String subject;
-	List<String> querySolution;
-
+	protected String endpoint, queryString, extractionFactor;
 
 	/* ***************************************************************************************************************
 	 * Function that invoke a sparql query call and returns the query string.
 	 * 
-	 * Parameters: void
-	 * Returns: String
 	 *****************************************************************************************************************/
 	@Override
 	public String call() throws Exception {
@@ -54,11 +51,15 @@ public abstract class QueryBuilder extends QueryElement implements IQueryBuilder
 		return null;
 	}
 	
+	/* ***************************************************************************************************************
+	 * Function that extracts results that were ccxaptured by the extractionFactor.
+	 * 
+	 *****************************************************************************************************************/
 	private List<String> extractRelevantResources(ResultSet rs) {
 		List<String> results = new ArrayList<String>();
 		while(rs.hasNext()){
         	QuerySolution soln = rs.nextSolution() ;
-        		RDFNode varNode = soln.get("category");
+        		RDFNode varNode = soln.get(this.extractionFactor);
         		if(varNode.isResource()){
 					Resource res = (Resource) varNode;
 					if(res.getURI() != null){
@@ -66,7 +67,6 @@ public abstract class QueryBuilder extends QueryElement implements IQueryBuilder
 					}
         		}
         }
-//			System.out.println("\n   "+ results.size()+"     \n");
 		return results;
 	}
 

@@ -80,7 +80,7 @@ public class DatasetOrchestrator {
 //	}
 
 	public List<String> generateQuery(String query) {
-		return this.qbuilderOrchestrator.generateQuery(query);
+		return this.qbuilderOrchestrator.generateQueries(query);
 	}
 
 }

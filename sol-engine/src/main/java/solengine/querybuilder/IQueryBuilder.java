@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 /* ***************************************************************************************************************
- * Interface that establishes the fundamental behaviour of QueryBuilder
+ * Interface that establishes the fundamental behaviour of QueryBuilder.
  * 
  * A QueryBuilder must basically implement:
  * 		(1) a call() function that returns String object, representing a query string.

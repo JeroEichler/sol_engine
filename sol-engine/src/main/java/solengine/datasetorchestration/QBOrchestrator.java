@@ -12,6 +12,17 @@ import solengine.querybuilder.QueryBuilderFactory;
 import solengine.querybuilder.QueryBuilderTypeEnum;
 import solengine.utils.Vocabulary;
 
+
+/* ***************************************************************************************************************
+ * Class that encompasses the orchestration process of a set of QueryBuilders.
+ * 
+ * It composes a queryString that selects the three most popular categories of the subQueryString. The 
+ * QueryBuilder.extractRelevantResources is used to extract relevant resources in the result of the query. In this
+ * scenario.
+ * 
+ * These three categories are used in IQueryBuilder.buildNewQuery to define an alternative query.
+ * 
+ *****************************************************************************************************************/
 public class QBOrchestrator {
 	
 	String datasetEndpoint = Vocabulary.EmptyString;
@@ -20,14 +31,20 @@ public class QBOrchestrator {
 		this.datasetEndpoint = address;
 	}
 	
-	public List<String> generateQuery(String queryString){
+	/* ***************************************************************************************************************
+	 * Function that generation of alternative queries.
+	 * 
+	 * Parameters:	(1) String queryString;  //represents the original query.
+	 * Returns: 	List<String>.			//represents the alternative queries.
+	 *****************************************************************************************************************/
+	public List<String> generateQueries(String queryString){
 		
 		List<String> alternativeQueries = new ArrayList<String>();
 		
 		List<QueryBuilderTypeEnum> qbTypes = DatasetOrchestConfigurator.buildQueryBuilderList(datasetEndpoint);
 		
 		for(QueryBuilderTypeEnum type : qbTypes){
-			String altQuery = this.getAlternativeQuery(type, queryString);
+			String altQuery = this.dispatchQueryBuilder(type, queryString);
 			if(altQuery.length() > 0) { // no problem occurred.
 				alternativeQueries.add(altQuery);
 			}
@@ -37,7 +54,7 @@ public class QBOrchestrator {
 		
 	}
 	
-	private String getAlternativeQuery(QueryBuilderTypeEnum qBuilderType, String queryString) {
+	private String dispatchQueryBuilder(QueryBuilderTypeEnum qBuilderType, String queryString) {
 		String result = "";
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
         List<Future<String>> temporaryResults = new ArrayList<>();
