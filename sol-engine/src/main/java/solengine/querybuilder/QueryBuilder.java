@@ -1,7 +1,6 @@
 package solengine.querybuilder;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.jena.query.Query;
@@ -32,11 +31,10 @@ public abstract class QueryBuilder extends QueryElement implements IQueryBuilder
 
 
 	/* ***************************************************************************************************************
-	 * Function that invoke a sparql query call and returns the query results.
+	 * Function that invoke a sparql query call and returns the query string.
 	 * 
 	 * Parameters: void
-	 * Returns: sol_tool_1_4.QueryResult.
-	 * Obs.: For log and debug only.
+	 * Returns: String
 	 *****************************************************************************************************************/
 	@Override
 	public String call() throws Exception {
@@ -70,25 +68,6 @@ public abstract class QueryBuilder extends QueryElement implements IQueryBuilder
         }
 //			System.out.println("\n   "+ results.size()+"     \n");
 		return results;
-	}
-	
-	private String buildNewQuery(List<String> resources) {
-		String filter = "filter(?catAux IN (";
-		Iterator<String> iterator = resources.iterator();
-		while(iterator.hasNext()){
-			filter = filter + "<" + iterator.next() +">";
-			if(iterator.hasNext()){
-				filter = filter + ", ";
-			}
-		}
-
-		filter = filter + ")) ";
-		String newQuerie = "select distinct ?sub ?catAux where { " +
-							"	?sub dct:subject ?catAux. " +
-							filter+
-							"} " +
-							"limit 100";
-		return newQuerie;
 	}
 
 }

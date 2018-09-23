@@ -3,6 +3,7 @@ package solengine.datasetorchestration;
 import java.util.ArrayList;
 import java.util.List;
 
+import solengine.querybuilder.QueryBuilderTypeEnum;
 import solengine.queryexecution.QueryExecutorTypeEnum;
 import solengine.utils.Config;
 import solengine.utils.Vocabulary;
@@ -55,6 +56,12 @@ public class DatasetOrchestConfigurator {
 //		types.add(QueryExecutorTypeEnum.SimpleBasicQueryProcessor);
 //		types.add(QueryExecutorTypeEnum.SimilarityQueryProcessor);
 		
+		return types;
+	}
+	
+	public static List<QueryBuilderTypeEnum> buildQueryBuilderList(String dataset) {
+		List<QueryBuilderTypeEnum> types = new ArrayList<QueryBuilderTypeEnum>();		
+		types.add(QueryBuilderTypeEnum.WrongHypothesis);		
 		return types;
 	}
 

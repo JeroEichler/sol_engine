@@ -47,8 +47,8 @@ public class EngineInterface {
 			this.datasets = this.initDatasetOrchestrator(addresses);
 
 			for(DatasetOrchestrator datasetOrchestrator : datasets){
-				String newQuery = datasetOrchestrator.generateQuery(query);
-				results.add(newQuery);
+				List<String> newQueries = datasetOrchestrator.generateQuery(query);
+				results.addAll(newQueries);
 			}
 			return results;
 		}

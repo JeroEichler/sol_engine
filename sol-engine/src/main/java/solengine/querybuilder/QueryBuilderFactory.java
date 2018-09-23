@@ -1,6 +1,6 @@
 package solengine.querybuilder;
 
-import solengine.querybuilder.generic.WrongHypothesisQueryBuilder;
+import solengine.querybuilder.generic.WrongHypothesisQB;
 
 public class QueryBuilderFactory {
 	/* ***************************************************************************************************************
@@ -14,7 +14,7 @@ public class QueryBuilderFactory {
 	 *****************************************************************************************************************/
 	public static IQueryBuilder createQueryTransformer(QueryBuilderTypeEnum type, String endpoint, String subquery){
 		if(type.equals(QueryBuilderTypeEnum.WrongHypothesis)){
-			return new WrongHypothesisQueryBuilder(endpoint, subquery);
+			return new WrongHypothesisQB(endpoint, subquery);
 		}
 		return null;
 	}
