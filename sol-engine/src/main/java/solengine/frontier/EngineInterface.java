@@ -10,20 +10,31 @@ import solengine.model.QueryAnalyser;
 import solengine.model.QueryResponse;
 import solengine.utils.Vocabulary;
 
+/* ***************************************************************************************************************
+ * Class that acts as interface for the rest of the application.
+ * 
+ *****************************************************************************************************************/
 public class EngineInterface {
 	
-	DatasetOrchestrator dataset;
 	List<DatasetOrchestrator> datasets;
 	
+	/* ***************************************************************************************************************
+	* Method that provides a list of dataset endpoints that the application may work with.
+	* 
+	*****************************************************************************************************************/
 	public List<String> availableDatasetAddresses(){
 		List<String> datasetAddresses = new ArrayList<>();
 		datasetAddresses.add(Vocabulary.DBpediaEndpoint);
-		//datasetAddresses.add(Vocabulary.linkedMDBEndpoint);
+		datasetAddresses.add(Vocabulary.linkedMDBEndpoint);
 		return datasetAddresses;
 	}
 
 	//TODO aggregating multiple dataset
 	//today, it is returning only the first
+	/* ***************************************************************************************************************
+	* Method that provides a HashMap of QueryResponses indexed by the  result string.
+	* 
+	*****************************************************************************************************************/
 	public Map<List<String>, QueryResponse> processOnDatasets(String query, List<String> addresses, int limit, int step) {
 		query = QueryAnalyser.limitQueryWithOffset(query, limit, step);
 		if(QueryAnalyser.isQueryValid(query)) {
@@ -57,6 +68,10 @@ public class EngineInterface {
 		}
 	}
 
+	/* ***************************************************************************************************************
+	* Method that initiate a list of DatasetOrchestrators.
+	* 
+	*****************************************************************************************************************/
 	private List<DatasetOrchestrator> initDatasetOrchestrator(List<String> addresses){
 		List<DatasetOrchestrator> datasets = new ArrayList<>();
 		for(String datasetAddress : addresses){

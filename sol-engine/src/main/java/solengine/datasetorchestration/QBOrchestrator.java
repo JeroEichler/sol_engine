@@ -16,11 +16,8 @@ import solengine.utils.Vocabulary;
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of a set of QueryBuilders.
  * 
- * It composes a queryString that selects the three most popular categories of the subQueryString. The 
- * QueryBuilder.extractRelevantResources is used to extract relevant resources in the result of the query. In this
- * scenario.
- * 
- * These three categories are used in IQueryBuilder.buildNewQuery to define an alternative query.
+ * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QBOrchestrator
+ * 												// works with.
  * 
  *****************************************************************************************************************/
 public class QBOrchestrator {
@@ -34,8 +31,8 @@ public class QBOrchestrator {
 	/* ***************************************************************************************************************
 	 * Function that generation of alternative queries.
 	 * 
-	 * Parameters:	(1) String queryString;  //represents the original query.
-	 * Returns: 	List<String>.			//represents the alternative queries.
+	 * Parameters:	(1) String queryString;  // represents the original query.
+	 * Returns: 	List<String>.			// represents the alternative queries.
 	 *****************************************************************************************************************/
 	public List<String> generateQueries(String queryString){
 		
