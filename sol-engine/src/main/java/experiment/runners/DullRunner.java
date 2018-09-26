@@ -18,7 +18,7 @@ public class DullRunner {
 
 	public static void main(String[] args) {
 		//helloWorldExperiment();
-		//helloWorldExperiment2();
+//		helloWorldExperiment2();
 		readHelloWorldResult();
 
 	}
@@ -85,7 +85,7 @@ public class DullRunner {
 	private static void readHelloWorldResult() {
 		List<List<String>> listR = NewStorage.readPersistedResults("userResults");
 		for(List<String> r: listR) {
-			System.out.println(r);
+			System.out.println(r +"  "+ r.size());
 		}
 		System.out.println(listR.size());
 		

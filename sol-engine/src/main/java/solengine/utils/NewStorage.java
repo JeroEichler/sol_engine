@@ -45,17 +45,9 @@ public class NewStorage {
 	
 	public static void saveEntity(String fileName, Object entity) {		
 		try {
-//			mapper.writeValue(new File(
-//					Config.baseFolder2 +
-//					fileName +".json"), entity);
-			
-			DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
-			prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE.instance);
-			
-			mapper.writer(prettyPrinter).writeValue(new File(
+			mapper.writeValue(new File(
 					Config.baseFolder2 +
-					fileName +".json"), entity);
-			
+					fileName +".json"), entity);			
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -98,9 +90,7 @@ public class NewStorage {
 					fileName +".json"), String[][].class);
 			for(String[] tempy: tempRead) {
 				List<String> x = Arrays.asList(tempy);
-				ArrayList<String> y = new ArrayList<String>(x);
-				y.add("jeroonimo");
-				savedList.add(y);
+				savedList.add(x);
 			}
 		} 
 		catch (JsonParseException e) {

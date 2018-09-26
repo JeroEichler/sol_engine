@@ -50,6 +50,7 @@ public class QEOrchestrator2ndStrategy {
 	 * 														// the result string.
 	 *****************************************************************************************************************/
 	public Map<List<String>, QueryResponse> processQuery(String queryString){
+		this.clearResult();
 		List<List<String>> originalResults = usrQueryExecutor.queryEndpoint(datasetEndpoint, queryString);
 		
 		for(List<String> singleResult : originalResults){
@@ -58,6 +59,15 @@ public class QEOrchestrator2ndStrategy {
 		
 		return this.queryResults;
 		
+	}
+	
+	// TODO: evaluate necessity.
+	/* ***************************************************************************************************************
+	 * Function that initializes the queryResult propery in order to clear any garbage from previous requestd.
+	 * 
+	 *****************************************************************************************************************/
+	public void clearResult(){
+		this.queryResults = new ConcurrentHashMap<List<String>,QueryResponse>();		
 	}
 
 	private void dispatchQueryExecutors(List<String> singleResult) {		
@@ -91,6 +101,19 @@ public class QEOrchestrator2ndStrategy {
           }
 
 		executor.shutdown();
+	}
+	
+	/* ***************************************************************************************************************
+	 * Function that provides the complete execution of a query.
+	 * 
+	 * Parameters:	(1) List<String> result;  		// represents the result that need additional information.
+	 * Returns: 	(2) QueryResponse.				// represents the result aggregated with additional information.
+	 *****************************************************************************************************************/
+	public QueryResponse getResponse(List<String> result){
+		this.clearResult();		
+		this.dispatchQueryExecutors(result);		
+		return this.queryResults.get(result);
+		
 	}
 
 }

@@ -21,7 +21,6 @@ public class DatasetOrchestrator {
 		this.datasetEndpoint = address;
 		this.usrQueryExecutor = new UserQueryExecutor();
 		
-		// new
 		this.qExecutorOrchestrator = new QEOrchestrator2ndStrategy(address);
 		this.qbuilderOrchestrator = new QBOrchestrator(address);
 	}
@@ -37,6 +36,12 @@ public class DatasetOrchestrator {
 
 	public List<String> generateQuery(String query) {
 		return this.qbuilderOrchestrator.generateQueries(query);
+	}
+	
+
+	
+	public QueryResponse getResponse(List<String> baseResult){		
+		return this.qExecutorOrchestrator.getResponse(baseResult);		
 	}
 
 }
