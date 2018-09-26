@@ -1,5 +1,6 @@
 package experiment.runners;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class DullRunner {
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
 	public static void main(String[] args) {
-		helloWorldExperiment();
-		
-		//readHelloWorldResult();
+		//helloWorldExperiment();
+		//helloWorldExperiment2();
+		readHelloWorldResult();
 
 	}
 
@@ -33,15 +34,49 @@ public class DullRunner {
 		long elapsedTime = System.currentTimeMillis() - start;
 		
 		System.out.println("### Finished at "+elapsedTime/1000F+" seconds");
-
 		
 	}
 
+	private static void helloWorldExperiment2() {
+		
+		List<List<String>> finalResult = new ArrayList<List<String>>();
+		
+		long start = System.currentTimeMillis();
+		
+		for(int i=0; i<70000; i=i+10000) {
+			List<List<String>> result = system.ordinaryProcess(basicLimitedQuery(i), datasetAddresses);
+			finalResult.addAll(result);
+			System.out.println(finalResult.size()+"=====================================>");
+		}
+			
+		System.out.println("\n\n"+finalResult.size()+"--------------------------------->");
+		NewStorage.saveEntity("userResults", finalResult);
+			
+		long elapsedTime = System.currentTimeMillis() - start;
+		
+		System.out.println("### Finished at "+elapsedTime/1000F+" seconds");
+		
+	}
+	
 	private static String basicQuery() {
 		String userQuery = 
 	            "SELECT ?subject where {" + 
 	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <http://dbpedia.org/ontology/Band> ." + 
 	                    "} "
+	                    ;
+		
+		return userQuery;
+	}
+	
+
+	private static String basicLimitedQuery(int offset) {
+		//int actualOffset = 10000 * offset;
+		String userQuery = 
+	            "SELECT ?subject where {" + 
+	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <http://dbpedia.org/ontology/Band> ." + 
+	                    "} " + 
+	                    "LIMIT 10000 " + 
+	                    "OFFSET " + offset + " "	                    
 	                    ;
 		
 		return userQuery;

@@ -32,9 +32,14 @@ public class QueryElement {
 				objectTyped.add(term);
 			}
 		}
-		Random randomGenerator = new Random();
-		int randomInt = randomGenerator.nextInt(objectTyped.size());
-		return objectTyped.get(randomInt);
+		if(objectTyped.size() > 0) {
+			Random randomGenerator = new Random();
+			int randomInt = randomGenerator.nextInt(objectTyped.size());
+			return objectTyped.get(randomInt);
+		}
+		else {
+			return "No URIs were provided.";
+		}
 	}
 
 }
