@@ -18,7 +18,7 @@ public class DullRunner {
 	public static void main(String[] args) {
 		helloWorldExperiment();
 		
-		readHelloWorldResult();
+		//readHelloWorldResult();
 
 	}
 
@@ -27,6 +27,7 @@ public class DullRunner {
 		long start = System.currentTimeMillis();
 			
 		List<List<String>> result = system.ordinaryProcess(basicQuery(), datasetAddresses);
+		System.out.print(result.size()+"aaaaaaaaaaaaaaaaaaaaaaaaaa");
 		NewStorage.saveEntity("userResults", result);
 			
 		long elapsedTime = System.currentTimeMillis() - start;
