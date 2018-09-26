@@ -29,6 +29,18 @@ public class EngineInterface {
 		return datasetAddresses;
 	}
 
+	/* ***************************************************************************************************************
+	* Method that initiate a list of DatasetOrchestrators.
+	* 
+	*****************************************************************************************************************/
+	private List<DatasetOrchestrator> initDatasetOrchestrator(List<String> addresses){
+		List<DatasetOrchestrator> datasets = new ArrayList<>();
+		for(String datasetAddress : addresses){
+			datasets.add(new DatasetOrchestrator(datasetAddress));
+		}
+		return datasets;
+	}
+
 	//TODO aggregating multiple dataset
 	//today, it is returning only the first
 	/* ***************************************************************************************************************
@@ -67,17 +79,20 @@ public class EngineInterface {
 			return new ArrayList<String>();
 		}
 	}
+	
+	/****************************************************************************************************************
+	 * 
+	 * *************************************************************************************************************/
+	
+	public List<List<String>> ordinaryProcess(String query, List<String> addresses){
+		List<List<String>> results = new ArrayList<List<String>>();
+		this.datasets = this.initDatasetOrchestrator(addresses);
 
-	/* ***************************************************************************************************************
-	* Method that initiate a list of DatasetOrchestrators.
-	* 
-	*****************************************************************************************************************/
-	private List<DatasetOrchestrator> initDatasetOrchestrator(List<String> addresses){
-		List<DatasetOrchestrator> datasets = new ArrayList<>();
-		for(String datasetAddress : addresses){
-			datasets.add(new DatasetOrchestrator(datasetAddress));
+		for(DatasetOrchestrator datasetOrchestrator : datasets){
+			List<List<String>> tableResults = datasetOrchestrator.basicProcessOfQuery(query);
+			results.addAll(tableResults);
 		}
-		return datasets;
+		return results;		
 	}
 
 }
