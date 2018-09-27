@@ -6,8 +6,11 @@ import java.util.List;
 
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
+import solengine.utils.NewNewStorage;
 import solengine.utils.NewStorage;
 import solengine.utils.Vocabulary;
+import solengine.utils.dto.QueryResponseDto;
+import solengine.utils.dto.TripleDto;
 
 public class SmartRunner {
 	
@@ -15,7 +18,8 @@ public class SmartRunner {
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
 	public static void main(String[] args) {
-		doIt();
+//		doIt();
+		doIt2();
 
 	}
 	
@@ -25,7 +29,25 @@ public class SmartRunner {
 		for(List<String> result : getInput()) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
 			for(QueryResponse response : responses) {
-				NewStorage.saveSingleResult(response);
+				if(response.isValid()) {
+					NewNewStorage.saveSingleResult(response);
+					NewNewStorage.updateControlList("successX", response);
+				}
+				else {
+					NewNewStorage.updateControlList("errorX", response);
+				}
+			}
+		}
+		
+	}
+	
+	private static void doIt2() {
+		List<String> savedList = NewNewStorage.readControlList("successX");
+		for(String item : savedList) {
+			QueryResponseDto response = NewNewStorage.readQResponse(item);
+			System.out.println(response.result+": ");
+			for(TripleDto triple : response.triples) {
+				System.out.println("    s: "+triple.subject+"   p: "+triple.predicate+"   o: "+triple.object);
 			}
 		}
 		

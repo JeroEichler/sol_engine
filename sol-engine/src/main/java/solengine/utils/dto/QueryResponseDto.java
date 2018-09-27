@@ -3,12 +3,12 @@ package solengine.utils.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryResultDto {
+public class QueryResponseDto {
 	
 	public List<String> result;
 	public List<TripleDto> triples;
 	
-	public QueryResultDto(){
+	public QueryResponseDto(){
 		this.triples = new ArrayList<TripleDto>();
 	}
 

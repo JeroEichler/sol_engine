@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import solengine.model.QueryResponse;
-import solengine.utils.dto.QueryResultDto;
+import solengine.utils.dto.QueryResponseDto;
 
 public class NewStorage {
 
@@ -29,7 +29,7 @@ public class NewStorage {
 	
 	public static void saveSingleResult(QueryResponse result){	
 		String title = StringFormatter.clean(result.getResult());	
-		QueryResultDto exportedResult = ModelConverter.convert(result);		
+		QueryResponseDto exportedResult = ModelConverter.convert(result);		
 		NewStorage.saveEntity(title, exportedResult);
 	}
 	

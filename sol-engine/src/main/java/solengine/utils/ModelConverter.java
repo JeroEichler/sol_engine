@@ -11,13 +11,13 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import solengine.model.QueryResponse;
-import solengine.utils.dto.QueryResultDto;
+import solengine.utils.dto.QueryResponseDto;
 import solengine.utils.dto.TripleDto;
 
 public class ModelConverter {
 	
-	public static QueryResultDto convert(QueryResponse origin) {
-		QueryResultDto queryResult = new QueryResultDto();
+	public static QueryResponseDto convert(QueryResponse origin) {
+		QueryResponseDto queryResult = new QueryResponseDto();
 		queryResult.result = origin.getResult();		
 
 		StmtIterator iter = origin.getAdditionalInfo().listStatements();
