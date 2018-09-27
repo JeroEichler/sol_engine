@@ -7,11 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.util.DefaultIndenter;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 
 import solengine.model.QueryResponse;
 import solengine.utils.dto.QueryResultDto;
@@ -24,15 +21,16 @@ public class NewStorage {
 		List<String> savedTitles = new ArrayList<String>();
 		for(QueryResponse result : results.values()) {
 			String title = StringFormatter.clean(result.getResult());
-			NewStorage.saveSingleResult(title, result);
+			NewStorage.saveSingleResult(result);
 			savedTitles.add(title);
 		}
 		NewStorage.saveProgress("progressX", savedTitles);
 	}
 	
-	public static void saveSingleResult(String fileName, QueryResponse result){		
+	public static void saveSingleResult(QueryResponse result){	
+		String title = StringFormatter.clean(result.getResult());	
 		QueryResultDto exportedResult = ModelConverter.convert(result);		
-		NewStorage.saveEntity(fileName, exportedResult);
+		NewStorage.saveEntity(title, exportedResult);
 	}
 	
 

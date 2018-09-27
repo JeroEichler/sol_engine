@@ -14,6 +14,8 @@ public class Vocabulary {
 	public final static int searchResultsSize = 10;
 
 	public static final String EmptyString = "";
+
+	public static final String ErrorMessage = "ERROR: cause by network problems.";
 	
 
 	/************************************************************************************************************

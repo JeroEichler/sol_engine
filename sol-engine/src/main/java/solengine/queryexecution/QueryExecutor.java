@@ -52,7 +52,7 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
         catch (Exception e) {
 //	            e.printStackTrace();
             System.out.println("..."+querySolution.toString());
-            return ControlObjects.getEmptyQueryResult();
+            return ControlObjects.emitAQueryResponseWithError();
         }
 	}
 

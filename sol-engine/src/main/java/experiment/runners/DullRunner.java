@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import solengine.frontier.EngineInterface;
-import solengine.utils.MapperFactory;
 import solengine.utils.NewStorage;
 import solengine.utils.Vocabulary;
 
@@ -85,7 +82,8 @@ public class DullRunner {
 	private static void readHelloWorldResult() {
 		List<List<String>> listR = NewStorage.readPersistedResults("userResults");
 		for(List<String> r: listR) {
-			System.out.println(r +"  "+ r.size());
+			if(r.contains("http://dbpedia.org/resource/The_Beatles"))
+				System.out.println(r +"  "+ r.size());
 		}
 		System.out.println(listR.size());
 		

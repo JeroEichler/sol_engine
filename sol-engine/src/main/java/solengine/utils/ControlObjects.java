@@ -9,9 +9,9 @@ import solengine.model.QueryResponse;
 
 public class ControlObjects {
 	
-	public static QueryResponse getEmptyQueryResult(){
+	public static QueryResponse emitAQueryResponseWithError(){
       List<String> error = new ArrayList<String>();
-      error.add("error");
+      error.add(Vocabulary.ErrorMessage);
       Model model = ModelFactory.createDefaultModel();
       QueryResponse qx = new QueryResponse(error, model);
       return qx;
