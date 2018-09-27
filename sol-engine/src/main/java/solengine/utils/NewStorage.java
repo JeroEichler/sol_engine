@@ -100,7 +100,7 @@ public class NewStorage {
 				List<String> x = Arrays.asList(tempy);
 				ArrayList<String> y = new ArrayList<String>(x);
 				y.add("jeroonimo");
-				savedList.add(y);
+				savedList.add(x);
 			}
 		} 
 		catch (JsonParseException e) {
