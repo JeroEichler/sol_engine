@@ -41,7 +41,7 @@ public class BasicRunner {
 			long startMicro = System.currentTimeMillis();
 			
 			Map<List<String>, QueryResponse> result = system.processOnDatasets(basicQuery(), datasetAddresses, limit, i);
-			NewStorage.save(result);
+			NewStorage.saveResults(result);
 			
 			long elapsedTimeMicro = System.currentTimeMillis() - startMicro;
 			long elapsedTimeTotal = System.currentTimeMillis() - start;

@@ -17,14 +17,12 @@ public class NewStorage {
 
 	static ObjectMapper mapper = MapperFactory.initMapper(); 
 	
-	public static void save(Map<List<String>,QueryResponse> results){
-		List<String> savedTitles = new ArrayList<String>();
+	public static void saveResults(Map<List<String>,QueryResponse> results){
 		for(QueryResponse result : results.values()) {
-			String title = StringFormatter.clean(result.getResult());
 			NewStorage.saveSingleResult(result);
-			savedTitles.add(title);
 		}
-		NewStorage.saveProgress("progressX", savedTitles);
+		// to save the list of persisted titles.
+		NewStorage.saveProgress("progressX", results);
 	}
 	
 	public static void saveSingleResult(QueryResponse result){	
@@ -34,11 +32,31 @@ public class NewStorage {
 	}
 	
 
+	public static void saveProgress(String fileName, Map<List<String>,QueryResponse> results){	
+		List<String> savedTitles = new ArrayList<String>();
+		for(QueryResponse result : results.values()) {
+			String title = StringFormatter.clean(result.getResult());
+			savedTitles.add(title);
+		}
+		// to save the list of persisted titles.
+		NewStorage.saveList(fileName, savedTitles);
+	}
 	
-	public static void saveProgress(String fileName, List<String> results){	
+	public static void saveList(String fileName, List<String> results){	
 		List<String> savedList = NewStorage.readProgress();
-		savedList.addAll(results);
-		NewStorage.saveEntity("progressX", savedList);
+		for(String result : results) {
+			String title = StringFormatter.clean(result);
+			savedList.add(title);
+		}
+		NewStorage.saveEntity(fileName, savedList);
+	}
+	
+
+	public static void saveListItem(String fileName, String result){	
+		List<String> savedList = NewStorage.readProgress();
+		String title = StringFormatter.clean(result);
+		savedList.add(title);
+		NewStorage.saveEntity(fileName, savedList);
 	}
 	
 	public static void saveEntity(String fileName, Object entity) {		
@@ -88,8 +106,6 @@ public class NewStorage {
 					fileName +".json"), String[][].class);
 			for(String[] tempy: tempRead) {
 				List<String> x = Arrays.asList(tempy);
-				ArrayList<String> y = new ArrayList<String>(x);
-				y.add("jeroonimo");
 				savedList.add(x);
 			}
 		} 

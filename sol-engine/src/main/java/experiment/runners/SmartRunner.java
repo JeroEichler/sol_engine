@@ -6,6 +6,7 @@ import java.util.List;
 
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
+import solengine.model.QueryResponseAnalyser;
 import solengine.utils.NewStorage;
 import solengine.utils.Vocabulary;
 
@@ -25,7 +26,12 @@ public class SmartRunner {
 		for(List<String> result : getInput()) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
 			for(QueryResponse response : responses) {
-				NewStorage.saveSingleResult(response);
+				if(QueryResponseAnalyser.isValid(response)) {
+					NewStorage.saveSingleResult(response);
+				}
+				else {
+					
+				}
 			}
 		}
 		

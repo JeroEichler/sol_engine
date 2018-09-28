@@ -9,7 +9,13 @@ import solengine.model.QueryResponse;
 
 public class ControlObjects {
 	
-	public static QueryResponse emitAQueryResponseWithError(){
+	/* ***************************************************************************************************************
+	* Function that provides QueryResponse object that is assigned as invalid.
+	* 
+	* Comment: It is used for disabling inconsistent QueryResponse caused by network exceptions.
+	* 
+	*****************************************************************************************************************/
+	public static QueryResponse emitInvalidQueryResponse(){
       List<String> error = new ArrayList<String>();
       error.add(Vocabulary.ErrorMessage);
       Model model = ModelFactory.createDefaultModel();
