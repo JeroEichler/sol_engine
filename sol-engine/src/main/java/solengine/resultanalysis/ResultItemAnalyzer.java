@@ -17,7 +17,6 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
 import solengine.model.QueryResponse;
-import solengine.utils.ControlObjects;
 import solengine.utils.Vocabulary;
 
 public class ResultItemAnalyzer implements Callable<String> {
@@ -31,7 +30,7 @@ public class ResultItemAnalyzer implements Callable<String> {
 
 	@Override
 	public String call(){
-		if(result.equals(ControlObjects.emitInvalidQueryResponse())){
+		if(!result.isValid()){
 			return "problem reading resource";
 		}
 		//extracting labels from QueryResponse.result

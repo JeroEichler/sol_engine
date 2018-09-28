@@ -19,7 +19,6 @@ public class SmartRunner {
 	public static void main(String[] args) {
 //		doIt();
 		doIt2();
-
 	}
 	
 
