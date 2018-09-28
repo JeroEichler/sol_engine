@@ -13,7 +13,6 @@ import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import solengine.model.QueryResponse;
 import solengine.queryexecution.generic.SimpleBasicQE;
 import solengine.utils.Config;
-import solengine.utils.ControlObjects;
 
 /* ***************************************************************************************************************
  * Abstract class that implements the fundamental behaviour of a QueryExecutor
@@ -52,7 +51,7 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
         catch (Exception e) {
 //	            e.printStackTrace();
             System.out.println("..."+querySolution.toString());
-            return ControlObjects.emitInvalidQueryResponse();
+            return new QueryResponse(querySolution, false);
         }
 	}
 

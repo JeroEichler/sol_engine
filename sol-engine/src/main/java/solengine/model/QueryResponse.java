@@ -26,10 +26,17 @@ public class QueryResponse implements Serializable {
 	
 	List<String> result;
 	String model;
+	boolean valid = true;
 	
 	public QueryResponse(List<String> result, Model model){
 		this.result = result;
 		this.model = ModelConverter.modelToString(model);
+	}
+	
+	public QueryResponse(List<String> result, boolean valid){
+		this.result = result;
+		this.model =  "";
+		this.valid = valid;
 	}
 	
 	public List<String> getResult(){
@@ -46,5 +53,9 @@ public class QueryResponse implements Serializable {
 				.filter(item -> item.isResource()).map(object -> object.asResource().getURI())
 				.collect(Collectors.toCollection(ArrayList<String>::new));
 		return resourceObjectsURI;
+	}
+	
+	public boolean isValid(){
+		return this.valid;
 	}
 }
