@@ -12,9 +12,9 @@ import solengine.utils.Vocabulary;
  * 		<subject> <owl:differentFrom> <resource>
  * 
  *****************************************************************************************************************/
-public class DiffInversion extends QueryExecutor {
+public class DiffInversionQE extends QueryExecutor {
 	
-	public DiffInversion(String endpoint, List<String> param) {
+	public DiffInversionQE(String endpoint, List<String> param) {
 		
 		this.endpoint = endpoint;
 		this.subject = this.getRandomResource(param);

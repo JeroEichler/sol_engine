@@ -44,7 +44,7 @@ public class QueryExecutorFactory {
 		
 
 		if(type.equals(QueryExecutorTypeEnum.DifferenceInversion)){
-			return new DiffInversion(endpoint, subject);
+			return new DiffInversionQE(endpoint, subject);
 		}
 		
 
