@@ -1,4 +1,4 @@
-package solengine.utils.dto;
+package solengine.model.dto;
 
 public class TripleDto {
 	

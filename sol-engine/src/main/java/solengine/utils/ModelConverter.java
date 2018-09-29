@@ -11,8 +11,8 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import solengine.model.QueryResponse;
-import solengine.utils.dto.QueryResponseDto;
-import solengine.utils.dto.TripleDto;
+import solengine.model.dto.QueryResponseDto;
+import solengine.model.dto.TripleDto;
 
 public class ModelConverter {
 	

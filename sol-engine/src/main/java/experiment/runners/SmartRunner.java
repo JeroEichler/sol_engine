@@ -6,10 +6,10 @@ import java.util.List;
 
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
+import solengine.model.dto.QueryResponseDto;
+import solengine.model.dto.TripleDto;
 import solengine.utils.NewNewStorage;
 import solengine.utils.Vocabulary;
-import solengine.utils.dto.QueryResponseDto;
-import solengine.utils.dto.TripleDto;
 
 public class SmartRunner {
 	

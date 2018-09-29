@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import solengine.model.QueryResponse;
-import solengine.utils.dto.QueryResponseDto;
+import solengine.model.dto.QueryResponseDto;
 
 public class NewStorage {
 
