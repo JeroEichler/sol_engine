@@ -43,6 +43,11 @@ public class QueryExecutorFactory {
 		}
 		
 
+		if(type.equals(QueryExecutorTypeEnum.DifferenceInversion)){
+			return new DiffInversion(endpoint, subject);
+		}
+		
+
 		if(type.equals(QueryExecutorTypeEnum.InfluenceAnalogy)){
 			return new InfluenceAnalogyQE(endpoint, subject);
 		}

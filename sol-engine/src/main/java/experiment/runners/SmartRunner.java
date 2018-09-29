@@ -17,7 +17,7 @@ public class SmartRunner {
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
 	public static void main(String[] args) {
-//		doIt();
+		doIt();
 		doIt2();
 	}
 	

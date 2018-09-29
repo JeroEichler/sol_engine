@@ -21,6 +21,7 @@ public class SameAsSurprisingObservationQE  extends QueryExecutor {
 		
 		this.endpoint = endpoint;
 		this.subject = this.getRandomResource(param);
+		this.limitedQueryExecutor = true;
 		
 		this.queryString  = 
 				"CONSTRUCT {<"+subject+"> <"+Vocabulary.Rdfs_SeeAlsoProperty+"> ?entity}" +

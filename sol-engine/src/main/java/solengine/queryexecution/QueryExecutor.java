@@ -25,6 +25,7 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
 	//Common Properties
 	protected String endpoint, queryString, subject;
 	protected List<String> querySolution;
+	protected boolean limitedQueryExecutor = false;
 
 
 	/* ***************************************************************************************************************
@@ -35,7 +36,7 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
 	 *****************************************************************************************************************/
 	@Override
 	public QueryResponse call() throws Exception {
-		if(Config.queryExecutorLimited() || this.isBasicType()) {
+		if(Config.queryExecutorLimited() || this.limitedQueryExecutor || this.isBasicType()) {
 			queryString = queryString +" LIMIT 2 ";
 		}
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;

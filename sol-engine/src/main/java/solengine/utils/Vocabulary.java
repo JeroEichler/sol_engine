@@ -39,6 +39,8 @@ public class Vocabulary {
 	
 	public final static String Owl_SameAsProperty = "http://www.w3.org/2002/07/owl#sameAs";
 	
+	public final static String Owl_differentFromProperty = "http://www.w3.org/2002/07/owl#differentFrom";
+	
 	public final static String Rdfs_SeeAlsoProperty = "http://www.w3.org/2000/01/rdf-schema#seeAlso";
 
 	public final static String Rdfs_SubclassOfProperty = "http://www.w3.org/2000/01/rdf-schema#subClassOf";

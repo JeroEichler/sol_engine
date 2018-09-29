@@ -13,6 +13,7 @@ public enum QueryExecutorTypeEnum {
 	HierarchieAnalogy,
 	HierarchieAnalogy_2,
 	HierarchieAnalogy_3,
+	DifferenceInversion,
 	
 	// music
 	InfluenceAnalogy,	

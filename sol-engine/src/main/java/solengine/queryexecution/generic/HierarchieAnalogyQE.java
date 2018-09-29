@@ -11,6 +11,7 @@ public class HierarchieAnalogyQE extends QueryExecutor {
 		
 		this.endpoint = endpoint;
 		this.subject = this.getRandomResource(param);
+		this.limitedQueryExecutor = true;
 		
 		this.queryString  = 
 				"CONSTRUCT {<"+subject+"> <"+Vocabulary.Stool_AnalogyProperty+"> ?similarEntity} " +
