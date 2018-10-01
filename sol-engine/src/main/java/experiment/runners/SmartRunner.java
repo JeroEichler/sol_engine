@@ -9,6 +9,7 @@ import solengine.model.QueryResponse;
 import solengine.model.dto.QueryResponseDto;
 import solengine.model.dto.TripleDto;
 import solengine.utils.NewNewStorage;
+import solengine.utils.RealStorage;
 import solengine.utils.Vocabulary;
 
 public class SmartRunner {
@@ -24,14 +25,21 @@ public class SmartRunner {
 
 
 	private static void doIt() {
-		for(List<String> result : getInput()) {
+		int i=0;
+		//List<List<String>> baseResults = getInput();
+		List<List<String>> baseResults = RealStorage.readBaseList("userResults");
+		for(List<String> result : baseResults) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
 			for(QueryResponse response : responses) {
 				if(response.isValid()) {
 					NewNewStorage.saveSingleResult(response);
 					NewNewStorage.updateControlList("successX", response);
+					RealStorage.reduceBaseList("userResults", result);
+					System.out.println("blush "+i);
+					i++;
 				}
 				else {
+					System.out.println("danger");
 					NewNewStorage.updateControlList("errorX", response);
 				}
 			}
