@@ -19,7 +19,7 @@ public class SmartRunner {
 
 	public static void main(String[] args) {
 		doIt();
-		doIt2();
+//		doIt2();
 	}
 	
 
@@ -27,20 +27,22 @@ public class SmartRunner {
 	private static void doIt() {
 		int i=0;
 		//List<List<String>> baseResults = getInput();
-		List<List<String>> baseResults = RealStorage.readBaseList("userResults");
+		List<List<String>> baseResults = RealStorage.readBaseList("_userResults");
 		for(List<String> result : baseResults) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
 			for(QueryResponse response : responses) {
 				if(response.isValid()) {
 					NewNewStorage.saveSingleResult(response);
-					NewNewStorage.updateControlList("successX", response);
-					RealStorage.reduceBaseList("userResults", result);
-					System.out.println("blush "+i);
+					NewNewStorage.updateControlList("_successX", response);
+					RealStorage.reduceBaseList("_userResults", result);
+					if(i % 1000 == 0) {
+						System.out.println("blush "+i);
+					}
 					i++;
 				}
 				else {
 					System.out.println("danger");
-					NewNewStorage.updateControlList("errorX", response);
+					NewNewStorage.updateControlList("_errorX", response);
 				}
 			}
 		}

@@ -32,7 +32,7 @@ public class RealRunner {
 		}
 			
 		System.out.println("\n\n"+finalResult.size()+"--------------------------------->");
-		RealStorage.saveEntity("userResults", finalResult);
+		RealStorage.saveEntity("_userResults", finalResult);
 			
 		long elapsedTime = System.currentTimeMillis() - start;
 		
@@ -56,7 +56,7 @@ public class RealRunner {
 
 	
 	private static void theOneThatReadsBasicResults() {
-		List<List<String>> listR = RealStorage.readBaseList("userResults");
+		List<List<String>> listR = RealStorage.readBaseList("_userResults");
 		for(List<String> r: listR) {
 			if(r.contains("http://dbpedia.org/resource/The_Beatles"))
 				System.out.println(r +"  "+ r.size());
