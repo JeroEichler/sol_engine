@@ -15,40 +15,40 @@ public class DatasetOrchestConfigurator {
 		
 		List<String> groups = Config.loadQueryExecutorGroups();
 		
-		// IF DBpedia
-		if(dataset == Vocabulary.DBpediaEndpoint) {
-			if(groups.contains("Analogy")) {			
-								
-//				if(domains.contains("Music")) {
-					types.add(QueryExecutorTypeEnum.InfluenceAnalogy);
-//				}
-//				if(domains.contains("Tourism")) {
-//					types.add(QueryExecutorTypeEnum.ArtworkAnalogy);
-//					types.add(QueryExecutorTypeEnum.CollectionAnalogy);
-//					types.add(QueryExecutorTypeEnum.VisitorAnalogy);
-//				}
-			}
-			if(groups.contains("Surprise")) {	
-				//if(domains.contains("Music")) {
-					types.add(QueryExecutorTypeEnum.AssociationSurprisingObservation);
-//					}
-//					if(domains.contains("Tourism")) {
-//						types.add(QueryExecutorTypeEnum.BuildingSurprisingObservationQE);
-//					}
-//				}
-			}
-		}
-		
+//		// IF DBpedia
+//		if(dataset == Vocabulary.DBpediaEndpoint) {
+//			if(groups.contains("Analogy")) {			
+//								
+////				if(domains.contains("Music")) {
+//					types.add(QueryExecutorTypeEnum.InfluenceAnalogy);
+////				}
+////				if(domains.contains("Tourism")) {
+////					types.add(QueryExecutorTypeEnum.ArtworkAnalogy);
+////					types.add(QueryExecutorTypeEnum.CollectionAnalogy);
+////					types.add(QueryExecutorTypeEnum.VisitorAnalogy);
+////				}
+//			}
+//			if(groups.contains("Surprise")) {	
+//				//if(domains.contains("Music")) {
+//					types.add(QueryExecutorTypeEnum.AssociationSurprisingObservation);
+////					}
+////					if(domains.contains("Tourism")) {
+////						types.add(QueryExecutorTypeEnum.BuildingSurprisingObservationQE);
+////					}
+////				}
+//			}
+//		}
+//		
 		//IF ANY Dataset
 		if(groups.contains("Surprise")) {	
 			types.add(QueryExecutorTypeEnum.SeeAlsoSurprisingObservation);
-			types.add(QueryExecutorTypeEnum.SameAsSurprisingObservation);	
+//			types.add(QueryExecutorTypeEnum.SameAsSurprisingObservation);	
 		}		
-		if(groups.contains("Analogy")) {			
-			types.add(QueryExecutorTypeEnum.HierarchieAnalogy);
-//			types.add(QueryExecutorTypeEnum.HierarchieAnalogy_2);
-//			types.add(QueryExecutorTypeEnum.HierarchieAnalogy_3);		
-		}
+//		if(groups.contains("Analogy")) {			
+//			types.add(QueryExecutorTypeEnum.HierarchieAnalogy);
+////			types.add(QueryExecutorTypeEnum.HierarchieAnalogy_2);
+////			types.add(QueryExecutorTypeEnum.HierarchieAnalogy_3);		
+//		}
 		
 
 		//not serendipitously

@@ -25,14 +25,14 @@ public class RealRunner {
 		
 		long start = System.currentTimeMillis();
 		
-		for(int i=0; i<70000; i=i+10000) {
+		for(int i=0; i<10000; i=i+10000) {
 			List<List<String>> result = system.ordinaryProcess(basicLimitedQuery(i), datasetAddresses);
 			finalResult.addAll(result);
 			System.out.println(finalResult.size()+"=====================================>");
 		}
 			
 		System.out.println("\n\n"+finalResult.size()+"--------------------------------->");
-		RealStorage.saveEntity("_userResults", finalResult);
+		RealStorage.saveEntity(SmartRunner.baseListFile, finalResult);
 			
 		long elapsedTime = System.currentTimeMillis() - start;
 		
@@ -56,7 +56,7 @@ public class RealRunner {
 
 	
 	private static void theOneThatReadsBasicResults() {
-		List<List<String>> listR = RealStorage.readBaseList("_userResults");
+		List<List<String>> listR = RealStorage.readBaseList(SmartRunner.baseListFile);
 		for(List<String> r: listR) {
 			if(r.contains("http://dbpedia.org/resource/The_Beatles"))
 				System.out.println(r +"  "+ r.size());

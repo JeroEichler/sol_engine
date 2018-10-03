@@ -14,6 +14,8 @@ import solengine.utils.Vocabulary;
 
 public class SmartRunner {
 	
+	static String baseListFile = "__userResults"; 
+	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
@@ -27,22 +29,23 @@ public class SmartRunner {
 	private static void doIt() {
 		int i=0;
 		//List<List<String>> baseResults = getInput();
-		List<List<String>> baseResults = RealStorage.readBaseList("_userResults");
+		List<List<String>> baseResults = RealStorage.readBaseList(baseListFile);
+		System.out.println("starting with "+baseResults.size());
 		for(List<String> result : baseResults) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
 			for(QueryResponse response : responses) {
 				if(response.isValid()) {
 					NewNewStorage.saveSingleResult(response);
-					NewNewStorage.updateControlList("_successX", response);
-					RealStorage.reduceBaseList("_userResults", result);
-					if(i % 1000 == 0) {
-						System.out.println("blush "+i);
+					NewNewStorage.updateControlList("__successX", response);
+					RealStorage.reduceBaseList(baseListFile, result);
+					if(i % 500 == 0) {
+						System.out.println("passed by "+i);
 					}
 					i++;
 				}
 				else {
 					System.out.println("danger");
-					NewNewStorage.updateControlList("_errorX", response);
+					NewNewStorage.updateControlList("__errorX", response);
 				}
 			}
 		}

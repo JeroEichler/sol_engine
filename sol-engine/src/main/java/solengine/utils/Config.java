@@ -9,7 +9,7 @@ import java.util.Properties;
 public class Config {
 
 	public static final String baseFolder = "C:/solengine/experiment/";
-	public static final String baseFolder2 = "C://solengine//experiment//";
+	public static final String baseFolder2 = "C://solengine//data//full//genSeeAlsoSO//";
 	
 	public static final String rdfFormat = "N-TRIPLES";
 	
