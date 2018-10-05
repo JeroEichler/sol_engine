@@ -20,7 +20,13 @@ public class SmartRunner {
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
 	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
 		doIt();
+
+		
+		long elapsedTime = System.currentTimeMillis() - start;
+		
+		System.out.println("### Finished at "+elapsedTime/1000F+" seconds");
 //		doIt2();
 	}
 	
