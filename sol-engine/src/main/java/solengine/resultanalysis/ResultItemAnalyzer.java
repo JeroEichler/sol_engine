@@ -16,10 +16,11 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
+import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
 import solengine.utils.Vocabulary;
 
-public class ResultItemAnalyzer implements Callable<String> {
+public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 
 	private String endpoint = Vocabulary.DBpediaEndpoint;
 	private QueryResponse result;
@@ -29,16 +30,19 @@ public class ResultItemAnalyzer implements Callable<String> {
 	}
 
 	@Override
-	public String call(){
+	public AnalyzedQueryResponse call(){
 		if(!result.isValid()){
-			return "problem reading resource";
+			return new AnalyzedQueryResponse(this.result);
 		}
+		
+		AnalyzedQueryResponse analysis = new AnalyzedQueryResponse(this.result);
 		//extracting labels from QueryResponse.result
 		List<String> queryResult = result.getResult();
 		List<String> resultLabels = new ArrayList<String>();
 		for(String queryResultItem : queryResult){
 			resultLabels.addAll(this.getDataAboutResource(queryResultItem));
-		}
+		}		
+		analysis.resultLabels = resultLabels;
 
 		//extracting labels from QueryResponse.additionalInfo
 		List<String> additionalInfoResults = result.getObjects();
@@ -46,12 +50,11 @@ public class ResultItemAnalyzer implements Callable<String> {
 		for(String queryResultItem : additionalInfoResults){
 			additionalInfoLabels.addAll(this.getDataAboutResource(queryResultItem));
 		}
-		return 
-				"similarity of "+
-				this.result.getResult()+""
-				+" is ;"+
-				""+this.computeSimilarity(resultLabels, additionalInfoLabels)
-				;
+		analysis.additionalInfoLabels = additionalInfoLabels;
+		
+		analysis.unexpectednessScore = this.computeSimilarity(resultLabels, additionalInfoLabels);
+		
+		return analysis;
 	}
 
 	private List<String> getDataAboutResource(String resource){
@@ -102,16 +105,26 @@ public class ResultItemAnalyzer implements Callable<String> {
 		return labels;
 	}
 	
-	private String computeSimilarity(List<String> listOne, List<String> listTwo) {
-		int sizeOfListOne = listOne.size();
-		if(sizeOfListOne == 0){
-			return -1+"";
-		}
-		listOne.removeAll(listTwo);
-		int numberOfSimilarItems = sizeOfListOne - listOne.size();
+	private double computeSimilarity(List<String> listOne, List<String> listTwo) {
+		double intersecctionCounter = 0;
 		
-		return (double) numberOfSimilarItems/sizeOfListOne +"; " +numberOfSimilarItems/(sizeOfListOne+listTwo.size()) +"; " +
-		sizeOfListOne +"; "+listTwo.size()+ "; "+numberOfSimilarItems;
+		for(String x : listOne) {
+			if(listTwo.contains(x)) {
+				intersecctionCounter++;
+			}
+		}
+		
+		List<String> unionList = new ArrayList<String>();
+		unionList.addAll(listOne);
+		for(String x : listTwo) {
+			if(!unionList.contains(x)) {
+				unionList.add(x);
+			}
+		}
+		double unexpectedness = 1 - ( intersecctionCounter / unionList.size());
+
+		
+		return unexpectedness;
 	}
 
 }

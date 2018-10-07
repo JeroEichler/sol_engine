@@ -3,9 +3,9 @@ package solengine.datasetorchestration;
 import java.util.ArrayList;
 import java.util.List;
 
+import solengine.configuration.Config;
 import solengine.querybuilder.QueryBuilderTypeEnum;
 import solengine.queryexecution.QueryExecutorTypeEnum;
-import solengine.utils.Config;
 import solengine.utils.Vocabulary;
 
 public class DatasetOrchestConfigurator {
@@ -30,7 +30,7 @@ public class DatasetOrchestConfigurator {
 			}
 			if(groups.contains("Surprise")) {	
 				//if(domains.contains("Music")) {
-					types.add(QueryExecutorTypeEnum.AssociationSurprisingObservation);
+//					types.add(QueryExecutorTypeEnum.AssociationSurprisingObservation);
 //					}
 //					if(domains.contains("Tourism")) {
 //						types.add(QueryExecutorTypeEnum.BuildingSurprisingObservationQE);
@@ -41,7 +41,7 @@ public class DatasetOrchestConfigurator {
 		
 //		//IF ANY Dataset
 //		if(groups.contains("Surprise")) {	
-//			types.add(QueryExecutorTypeEnum.SeeAlsoSurprisingObservation);
+			types.add(QueryExecutorTypeEnum.SeeAlsoSurprisingObservation);
 //			types.add(QueryExecutorTypeEnum.SameAsSurprisingObservation);	
 //		}		
 //		if(groups.contains("Analogy")) {			

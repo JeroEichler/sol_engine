@@ -7,26 +7,27 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
 
 
 public class ResultAnalysisOrchestrator {
 
-	public List<String> processAnalysis(List<QueryResponse>  results){
+	public List<AnalyzedQueryResponse> analyzeList(List<QueryResponse>  results){
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
-        List<Future<String>> temporaryResults = new ArrayList<>();
-        List<String> analysisResults = new ArrayList<>();
+        List<Future<AnalyzedQueryResponse>> temporaryResults = new ArrayList<>();
+        List<AnalyzedQueryResponse> analysisResults = new ArrayList<>();
 //		int k =0;
 		for(QueryResponse resultItem : results){
 			ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem);
 			temporaryResults.add(executor.submit(analyzer));
 //			System.out.println(k++);
 		}
-		for(Future<String> future : temporaryResults)
+		for(Future<AnalyzedQueryResponse> future : temporaryResults)
         {
               try
               {
-            	  String analysis = future.get();
+            	  AnalyzedQueryResponse analysis = future.get();
             	  analysisResults.add(analysis);
               } 
               catch (InterruptedException | ExecutionException e) 
@@ -38,5 +39,31 @@ public class ResultAnalysisOrchestrator {
 		executor.shutdown();
 		
 		return analysisResults;
+	}
+	
+	public AnalyzedQueryResponse analyzeSingle(QueryResponse  resultItem){
+		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
+        List<Future<AnalyzedQueryResponse>> temporaryResults = new ArrayList<>();
+        AnalyzedQueryResponse analysisResult = new AnalyzedQueryResponse(resultItem);
+
+        ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem);
+        temporaryResults.add(executor.submit(analyzer));
+
+		for(Future<AnalyzedQueryResponse> future : temporaryResults)
+        {
+              try
+              {
+            	  AnalyzedQueryResponse analysis = future.get();
+            	  analysisResult = analysis;
+              } 
+              catch (InterruptedException | ExecutionException e) 
+              {
+                  e.printStackTrace();
+              }
+          }
+
+		executor.shutdown();
+		
+		return analysisResult;
 	}
 }

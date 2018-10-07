@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import solengine.configuration.Config;
 import solengine.model.QueryResponse;
 import solengine.model.dto.QueryResponseDto;
 
@@ -56,7 +57,7 @@ public class NewNewStorage {
 	}
 
 	
-	public static QueryResponseDto readQResponse(String fileName) {
+	public static QueryResponseDto readQResponseDto(String fileName) {
 		QueryResponseDto savedList = null;
 		
 		try {
@@ -74,6 +75,13 @@ public class NewNewStorage {
 			e.printStackTrace();
 		}
 		return savedList;
+	}
+	
+	public static QueryResponse readQResponse(String fileName) {
+		QueryResponseDto dto = readQResponseDto(fileName);
+		
+		QueryResponse qr = ModelConverter.convert(dto);
+		return qr;
 	}
 
 }

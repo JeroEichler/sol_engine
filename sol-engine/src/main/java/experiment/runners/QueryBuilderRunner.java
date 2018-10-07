@@ -3,8 +3,8 @@ package experiment.runners;
 import java.util.ArrayList;
 import java.util.List;
 
+import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
-import solengine.utils.Config;
 //import solengine.utils.Storage;
 import solengine.utils.Vocabulary;
 

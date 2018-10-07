@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import solengine.configuration.Config;
 import solengine.model.QueryResponse;
 import solengine.model.dto.QueryResponseDto;
 

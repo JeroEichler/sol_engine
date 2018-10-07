@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
-import solengine.utils.Config;
 import solengine.utils.NewStorage;
 import solengine.utils.Storage;
 import solengine.utils.Vocabulary;

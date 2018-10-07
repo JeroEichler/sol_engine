@@ -10,9 +10,9 @@ import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
+import solengine.configuration.Config;
 import solengine.model.QueryResponse;
 import solengine.queryexecution.generic.SimpleBasicQE;
-import solengine.utils.Config;
 
 /* ***************************************************************************************************************
  * Abstract class that implements the fundamental behaviour of a QueryExecutor
