@@ -36,11 +36,19 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 		}
 		
 		AnalyzedQueryResponse analysis = new AnalyzedQueryResponse(this.result);
+		
 		//extracting labels from QueryResponse.result
 		List<String> queryResult = result.getResult();
 		List<String> resultLabels = new ArrayList<String>();
 		for(String queryResultItem : queryResult){
-			resultLabels.addAll(this.getDataAboutResource(queryResultItem));
+			List<String> labels = this.getDataAboutResource(queryResultItem);
+			if(labels != null) {
+				resultLabels.addAll(labels);
+			}
+			else {
+				analysis.valid = false;
+				return analysis;
+			}			
 		}		
 		analysis.resultLabels = resultLabels;
 
@@ -48,7 +56,14 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 		List<String> additionalInfoResults = result.getObjects();
 		List<String> additionalInfoLabels = new ArrayList<String>();
 		for(String queryResultItem : additionalInfoResults){
-			additionalInfoLabels.addAll(this.getDataAboutResource(queryResultItem));
+			List<String> labels = this.getDataAboutResource(queryResultItem);
+			if(labels != null) {
+				additionalInfoLabels.addAll(labels);
+			}
+			else {
+				analysis.valid = false;
+				return analysis;
+			}	
 		}
 		analysis.additionalInfoLabels = additionalInfoLabels;
 		

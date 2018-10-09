@@ -8,6 +8,7 @@ public class AnalyzedQueryResponse {
 	public List<String> resultLabels;
 	public List<String> additionalInfoLabels;
 	public double unexpectednessScore;
+	public boolean valid = true;
 	public boolean emptyResponse = false;
 	
 	public AnalyzedQueryResponse(QueryResponse qr) {

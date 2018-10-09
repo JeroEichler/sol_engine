@@ -71,6 +71,7 @@ public class ModelConverter {
 		target.resultLabels = origin.resultLabels;
 		target.unexpectednessScore = origin.unexpectednessScore;	
 		target.emptyResponse = origin.emptyResponse;
+		target.valid = origin.valid;
 		
 		return target;
 	}
@@ -83,6 +84,7 @@ public class ModelConverter {
 		target.resultLabels = origin.resultLabels;
 		target.unexpectednessScore = origin.unexpectednessScore;	
 		target.emptyResponse = origin.emptyResponse;		
+		target.valid = origin.valid;
 		
 		return target;
 	}
