@@ -17,11 +17,11 @@ public class ResultAnalysisOrchestrator {
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
         List<Future<AnalyzedQueryResponse>> temporaryResults = new ArrayList<>();
         List<AnalyzedQueryResponse> analysisResults = new ArrayList<>();
-//		int k =0;
+		int k =0;
 		for(QueryResponse resultItem : results){
 			ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem);
 			temporaryResults.add(executor.submit(analyzer));
-//			System.out.println(k++);
+			System.out.println(k++);
 		}
 		for(Future<AnalyzedQueryResponse> future : temporaryResults)
         {

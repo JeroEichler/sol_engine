@@ -54,7 +54,7 @@ public class ModelConverter {
 			Resource subject = model.createResource(triple.subject);
 			Property predicate = model.createProperty(triple.predicate);
 			Resource object = model.createResource(triple.object);
-			subject.addLiteral(predicate, object);
+			subject.addProperty(predicate, object);
 		}
 		QueryResponse target = new QueryResponse(result, model);
 		
