@@ -13,7 +13,9 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 import solengine.configuration.Config;
+import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
+import solengine.model.dto.AnalyzedQueryResponseDto;
 import solengine.model.dto.QueryResponseDto;
 import solengine.model.dto.TripleDto;
 
@@ -57,6 +59,28 @@ public class ModelConverter {
 			subject.addProperty(predicate, object);
 		}
 		QueryResponse target = new QueryResponse(result, model);
+		
+		return target;
+	}
+	
+	public static AnalyzedQueryResponseDto convert(AnalyzedQueryResponse origin) {
+		QueryResponseDto qrd = convert(origin.queryResponse);
+		
+		AnalyzedQueryResponseDto target = new AnalyzedQueryResponseDto(qrd);
+		target.additionalInfoLabels = origin.additionalInfoLabels;
+		target.resultLabels = origin.resultLabels;
+		target.unexpectednessScore = origin.unexpectednessScore;		
+		
+		return target;
+	}
+	
+	public static AnalyzedQueryResponse convert(AnalyzedQueryResponseDto origin) {
+		QueryResponse qrd = convert(origin.queryResponse);
+		
+		AnalyzedQueryResponse target = new AnalyzedQueryResponse(qrd);
+		target.additionalInfoLabels = origin.additionalInfoLabels;
+		target.resultLabels = origin.resultLabels;
+		target.unexpectednessScore = origin.unexpectednessScore;		
 		
 		return target;
 	}

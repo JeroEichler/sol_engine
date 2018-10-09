@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import solengine.frontier.EngineInterface;
+import solengine.model.Vocabulary;
 import solengine.utils.NewStorage;
-import solengine.utils.Vocabulary;
 
 public class DullRunner {
 	

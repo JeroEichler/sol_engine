@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import solengine.datasetorchestration.DatasetOrchestrator;
 import solengine.model.QueryAnalyser;
 import solengine.model.QueryResponse;
-import solengine.utils.Vocabulary;
+import solengine.model.Vocabulary;
 
 /* ***************************************************************************************************************
  * Class that acts as interface for the rest of the application.

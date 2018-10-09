@@ -1,4 +1,4 @@
-package solengine.utils;
+package solengine.model;
 
 /************************************************************************************************************
  * Class that localize external references of the application e.g. messages, datasets, URL and 

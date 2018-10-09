@@ -18,7 +18,7 @@ import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 
 import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
-import solengine.utils.Vocabulary;
+import solengine.model.Vocabulary;
 
 public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 
@@ -106,6 +106,10 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 	}
 	
 	private double computeSimilarity(List<String> listOne, List<String> listTwo) {
+		
+		if(listOne.size() == 0 || listTwo.size() == 0) {
+			return -1;
+		}
 		double intersecctionCounter = 0;
 		
 		for(String x : listOne) {

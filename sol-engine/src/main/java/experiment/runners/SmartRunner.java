@@ -5,9 +5,9 @@ import java.util.List;
 
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
+import solengine.model.Vocabulary;
 import solengine.utils.NewNewStorage;
 import solengine.utils.RealStorage;
-import solengine.utils.Vocabulary;
 
 public class SmartRunner {
 	

@@ -53,28 +53,5 @@ public class RealStorage extends BaseStorage {
 		}
 		
 	}
-	
-	
-	public static List<String> readList(String fileName) {
-		List<String> list = new ArrayList<String>();
-		
-		try {
-			String[] tempRead = mapper.readValue(new File(
-					Config.baseFolder2 +
-					fileName +".json"), String[].class);
-			list = Arrays.asList(tempRead);
-		} 
-		catch (JsonParseException e) {
-			e.printStackTrace();
-		} 
-		catch (JsonMappingException e) {
-			e.printStackTrace();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
 
 }

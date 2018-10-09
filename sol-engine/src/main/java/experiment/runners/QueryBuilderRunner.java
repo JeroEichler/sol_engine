@@ -5,8 +5,7 @@ import java.util.List;
 
 import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
-//import solengine.utils.Storage;
-import solengine.utils.Vocabulary;
+import solengine.model.Vocabulary;
 
 public class QueryBuilderRunner {
 

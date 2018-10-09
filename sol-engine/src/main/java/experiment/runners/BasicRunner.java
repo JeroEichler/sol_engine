@@ -7,9 +7,9 @@ import java.util.Map;
 import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
+import solengine.model.Vocabulary;
 import solengine.utils.NewStorage;
 import solengine.utils.Storage;
-import solengine.utils.Vocabulary;
 
 public class BasicRunner {
 	

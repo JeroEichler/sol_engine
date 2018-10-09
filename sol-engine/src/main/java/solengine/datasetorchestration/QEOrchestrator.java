@@ -10,11 +10,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import solengine.model.QueryResponse;
+import solengine.model.Vocabulary;
 import solengine.queryexecution.IQueryExecutor;
 import solengine.queryexecution.QueryExecutorFactory;
 import solengine.queryexecution.QueryExecutorTypeEnum;
 import solengine.queryexecution.UserQueryExecutor;
-import solengine.utils.Vocabulary;
 
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of a set of QueryExecutors.

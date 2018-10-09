@@ -2,6 +2,9 @@ package solengine.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -28,5 +31,29 @@ public class BaseStorage {
 		}
 		
 	}
+	
+
+	public static List<String> readList(String folder, String fileName) {
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			String[] tempRead = mapper.readValue(new File(
+					Config.root + "full//" +
+					folder + "//" +
+					fileName +".json"), String[].class);
+			list = Arrays.asList(tempRead);
+		} 
+		catch (JsonParseException e) {
+			e.printStackTrace();
+		} 
+		catch (JsonMappingException e) {
+			e.printStackTrace();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 
 }

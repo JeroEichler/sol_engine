@@ -7,10 +7,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import solengine.model.Vocabulary;
 import solengine.querybuilder.IQueryBuilder;
 import solengine.querybuilder.QueryBuilderFactory;
 import solengine.querybuilder.QueryBuilderTypeEnum;
-import solengine.utils.Vocabulary;
 
 
 /* ***************************************************************************************************************

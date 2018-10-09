@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import solengine.model.QueryResponse;
+import solengine.model.Vocabulary;
 import solengine.queryexecution.UserQueryExecutor;
-import solengine.utils.Vocabulary;
 
 public class DatasetOrchestrator {
 	

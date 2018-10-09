@@ -2,8 +2,8 @@ package solengine.queryexecution.generic;
 
 import java.util.List;
 
+import solengine.model.Vocabulary;
 import solengine.queryexecution.QueryExecutor;
-import solengine.utils.Vocabulary;
 
 public class HierarchieAnalogyQE_Alt2 extends QueryExecutor {
 

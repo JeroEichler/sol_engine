@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import solengine.configuration.Config;
+import solengine.model.Vocabulary;
 import solengine.querybuilder.QueryBuilderTypeEnum;
 import solengine.queryexecution.QueryExecutorTypeEnum;
-import solengine.utils.Vocabulary;
 
 public class DatasetOrchestConfigurator {
 	

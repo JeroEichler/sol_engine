@@ -2,8 +2,8 @@ package solengine.queryexecution.tourism;
 
 import java.util.List;
 
+import solengine.model.Vocabulary;
 import solengine.queryexecution.QueryExecutor;
-import solengine.utils.Vocabulary;
 
 /* ***************************************************************************************************************
  * Class that customize the QueryExecutor to construct statements of the form

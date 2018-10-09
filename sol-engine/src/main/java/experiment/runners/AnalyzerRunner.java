@@ -12,13 +12,21 @@ import solengine.utils.RealStorage;
 public class AnalyzerRunner {
 
 	public static void main(String[] args) {
+		
+		long start = System.currentTimeMillis();
+		
 		stepOne();
+//		stepTwo();		
+
+		long elapsedTime = System.currentTimeMillis() - start;
+		
+		System.out.println("### Finished at "+elapsedTime/1000F+" seconds");
 
 	}
 	
 	public static void stepOne() {
-//		List<String> list = RealStorage.readList("__successX");
-		List<String> list = readList("__successX");
+		List<String> list = RealStorage.readList("genSeeAlsoSO", "__successX");
+//		List<String> list = readList("__successX");
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
 		
 		for(String title : list) {
@@ -32,6 +40,23 @@ public class AnalyzerRunner {
 		
 		for(AnalyzedQueryResponse title : analysis) {
 			System.out.println(title.unexpectednessScore);
+		}
+
+	}
+	
+	public static void stepTwo() {
+		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
+		
+		List<String> list = RealStorage.readList("genSeeAlsoSO", "__successX");
+//		List<String> list = readList("__successX");
+		
+		for(String title : list) {
+			QueryResponse qr = NewNewStorage.readQResponse(title);
+			if(qr.getObjects().size() > 0) {
+//				System.out.println(qr.getObjects());
+				AnalyzedQueryResponse analyzed = analyser.analyzeSingle(qr);
+				System.out.println(analyzed.unexpectednessScore);
+			}
 		}
 
 	}

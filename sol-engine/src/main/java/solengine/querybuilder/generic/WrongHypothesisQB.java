@@ -6,8 +6,8 @@ import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.Syntax;
 
+import solengine.model.Vocabulary;
 import solengine.querybuilder.QueryBuilder;
-import solengine.utils.Vocabulary;
 
 /* ***************************************************************************************************************
  * Class that customize the QueryBuilder that formulates a second query string.
