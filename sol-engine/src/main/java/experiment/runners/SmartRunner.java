@@ -8,10 +8,12 @@ import solengine.model.QueryResponse;
 import solengine.model.Vocabulary;
 import solengine.utils.NewNewStorage;
 import solengine.utils.RealStorage;
+import solengine.utils.StringFormatter;
 
 public class SmartRunner {
 	
 	static String baseListFile = "__userResults"; 
+	static String baseFolder = "genSeeAlsoSO//"; 
 	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
@@ -32,22 +34,23 @@ public class SmartRunner {
 
 
 	private static void doIt() {
-		List<List<String>> baseResults = RealStorage.readBaseList(baseListFile);
+		List<List<String>> baseResults = RealStorage.readListList(baseFolder, baseListFile);
 		System.out.println("starting with "+baseResults.size());
 		for(List<String> result : baseResults) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
 			for(QueryResponse response : responses) {
+				String title = StringFormatter.clean(response.getResult());
 				if(response.isValid()) {
-					NewNewStorage.saveSingleResult(response);
-					NewNewStorage.updateControlList("__successX", response);
-					RealStorage.reduceBaseList(baseListFile, result);
+					NewNewStorage.saveSingleResult(title, response);
+					NewNewStorage.updateList(baseFolder, "__successX", title);
+					RealStorage.reduceListList(baseFolder, baseListFile, result);
 
 					// pro form
 					printProgress();
 				}
 				else {
 					System.out.println("danger");
-					NewNewStorage.updateControlList("__errorX", response);
+					NewNewStorage.updateList(baseFolder, "__errorX", title);
 				}
 			}
 		}

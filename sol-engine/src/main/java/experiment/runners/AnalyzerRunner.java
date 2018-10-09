@@ -74,10 +74,4 @@ public class AnalyzerRunner {
 
 	}
 
-	private static List<String> readList(String string) {
-		List<String> list = new ArrayList<String>();
-		list.add("Alternating_group");
-		return list;
-	}
-
 }

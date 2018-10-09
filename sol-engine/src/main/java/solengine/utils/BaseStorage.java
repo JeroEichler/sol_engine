@@ -69,6 +69,13 @@ public class BaseStorage {
 		}
 		return list;
 	}
+	
+
+	public static void updateList(String folder, String fileName, String title){	
+		List<String> savedList = NewNewStorage.readList(folder, fileName);
+		savedList.add(title);
+		NewStorage.saveEntity(fileName, savedList);
+	}
 
 
 }

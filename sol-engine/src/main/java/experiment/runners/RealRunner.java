@@ -56,7 +56,7 @@ public class RealRunner {
 
 	
 	private static void theOneThatReadsBasicResults() {
-		List<List<String>> listR = RealStorage.readBaseList(SmartRunner.baseListFile);
+		List<List<String>> listR = RealStorage.readListList(SmartRunner.baseFolder, SmartRunner.baseListFile);
 		for(List<String> r: listR) {
 			if(r.contains("http://dbpedia.org/resource/The_Beatles"))
 				System.out.println(r +"  "+ r.size());

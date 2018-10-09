@@ -13,12 +13,13 @@ import solengine.configuration.Config;
 public class RealStorage extends BaseStorage {
 	
 	
-	public static List<List<String>> readBaseList(String fileName) {
+	public static List<List<String>> readListList(String folder, String fileName) {
 		List<List<String>> savedList = new ArrayList<List<String>>();
 		
 		try {
 			String[][] tempRead = mapper.readValue(new File(
-					Config.baseFolder2 +
+					Config.root + "full//" +
+					folder + "//" +
 					fileName +".json"), String[][].class);
 			for(String[] tempy: tempRead) {
 				List<String> x = Arrays.asList(tempy);
@@ -37,8 +38,8 @@ public class RealStorage extends BaseStorage {
 		return savedList;
 	}
 	
-	public static void reduceBaseList(String fileName, List<String> itemSaved) {
-		List<List<String>> baseList = readBaseList(fileName);
+	public static void reduceListList(String folder, String fileName, List<String> itemSaved) {
+		List<List<String>> baseList = readListList(folder, fileName);
 		baseList.remove(itemSaved);
 		try {
 			mapper.writeValue(new File(
