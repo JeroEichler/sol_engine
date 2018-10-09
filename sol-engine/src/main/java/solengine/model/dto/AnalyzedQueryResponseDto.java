@@ -8,6 +8,7 @@ public class AnalyzedQueryResponseDto {
 	public List<String> resultLabels;
 	public List<String> additionalInfoLabels;
 	public double unexpectednessScore;
+	public boolean emptyResponse = false;
 	
 	public AnalyzedQueryResponseDto(QueryResponseDto qr) {
 		this.queryResponse = qr;

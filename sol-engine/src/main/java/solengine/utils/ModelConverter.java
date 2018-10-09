@@ -69,18 +69,20 @@ public class ModelConverter {
 		AnalyzedQueryResponseDto target = new AnalyzedQueryResponseDto(qrd);
 		target.additionalInfoLabels = origin.additionalInfoLabels;
 		target.resultLabels = origin.resultLabels;
-		target.unexpectednessScore = origin.unexpectednessScore;		
+		target.unexpectednessScore = origin.unexpectednessScore;	
+		target.emptyResponse = origin.emptyResponse;
 		
 		return target;
 	}
 	
 	public static AnalyzedQueryResponse convert(AnalyzedQueryResponseDto origin) {
-		QueryResponse qrd = convert(origin.queryResponse);
+		QueryResponse qr = convert(origin.queryResponse);
 		
-		AnalyzedQueryResponse target = new AnalyzedQueryResponse(qrd);
+		AnalyzedQueryResponse target = new AnalyzedQueryResponse(qr);
 		target.additionalInfoLabels = origin.additionalInfoLabels;
 		target.resultLabels = origin.resultLabels;
-		target.unexpectednessScore = origin.unexpectednessScore;		
+		target.unexpectednessScore = origin.unexpectednessScore;	
+		target.emptyResponse = origin.emptyResponse;		
 		
 		return target;
 	}

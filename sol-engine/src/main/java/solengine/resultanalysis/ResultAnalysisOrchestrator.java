@@ -24,6 +24,11 @@ public class ResultAnalysisOrchestrator {
 				temporaryResults.add(executor.submit(analyzer));
 //				System.out.println(k++ + " dispatched.");
 			}
+			else {
+				AnalyzedQueryResponse not_analyzed = new AnalyzedQueryResponse(resultItem);
+				not_analyzed.emptyResponse = true;
+				analysisResults.add(not_analyzed);
+			}
 		}
 		for(Future<AnalyzedQueryResponse> future : temporaryResults)
         {

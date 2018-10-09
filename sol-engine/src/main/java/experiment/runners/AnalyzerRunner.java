@@ -26,7 +26,7 @@ public class AnalyzerRunner {
 	
 	public static void stepOne() {
 		List<String> list = RealStorage.readList("genSeeAlsoSO", "__successX");
-//		List<String> list = readList("__successX");
+		List<String> saved = new ArrayList<String>();
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
 		
 		for(String title : list) {
@@ -38,9 +38,13 @@ public class AnalyzerRunner {
 		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
 		List<AnalyzedQueryResponse> analysis = analyser.analyzeList(responses);
 		
-		for(AnalyzedQueryResponse title : analysis) {
-			System.out.println(title.unexpectednessScore);
+		for(AnalyzedQueryResponse item : analysis) {
+//			System.out.println(title.unexpectednessScore);
+			String title = NewNewStorage.saveSingleAnalysis("genSeeAlsoSO", item);
+			saved.add(title);
 		}
+		
+		NewNewStorage.saveEntity("genSeeAlsoSO", "__successX", saved);
 
 	}
 	

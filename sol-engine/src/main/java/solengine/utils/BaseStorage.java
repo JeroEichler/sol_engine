@@ -28,8 +28,23 @@ public class BaseStorage {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
+		}		
+	}
+	
+
+	public static void saveEntity(String folder, String fileName, Object entity) {		
+		try {
+			mapper.writeValue(new File(
+					Config.root + "analysis//full//" +
+					folder + "//" +
+					fileName +".json"), entity);			
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 
