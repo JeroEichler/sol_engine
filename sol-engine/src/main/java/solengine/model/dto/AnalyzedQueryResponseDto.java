@@ -11,6 +11,10 @@ public class AnalyzedQueryResponseDto {
 	public boolean valid = true;
 	public boolean emptyResponse = false;
 	
+	public AnalyzedQueryResponseDto() {
+		
+	}
+	
 	public AnalyzedQueryResponseDto(QueryResponseDto qr) {
 		this.queryResponse = qr;
 	}

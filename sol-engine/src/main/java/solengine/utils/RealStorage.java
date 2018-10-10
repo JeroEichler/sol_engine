@@ -18,7 +18,7 @@ public class RealStorage extends BaseStorage {
 		
 		try {
 			String[][] tempRead = mapper.readValue(new File(
-					Config.root + "full//" +
+					Config.root + 
 					folder + "//" +
 					fileName +".json"), String[][].class);
 			for(String[] tempy: tempRead) {

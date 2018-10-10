@@ -23,12 +23,13 @@ public class NewNewStorage extends BaseStorage{
 	
 
 	
-	public static QueryResponseDto readQResponseDto(String fileName) {
+	public static QueryResponseDto readQResponseDto(String folder, String fileName) {
 		QueryResponseDto savedList = null;
 		
 		try {
 			savedList = mapper.readValue(new File(
-					Config.baseFolder2 +
+					Config.root + 
+					folder + "//" +
 					fileName + ".json"), QueryResponseDto.class);
 		} 
 		catch (JsonParseException e) {
@@ -43,8 +44,8 @@ public class NewNewStorage extends BaseStorage{
 		return savedList;
 	}
 	
-	public static QueryResponse readQResponse(String fileName) {
-		QueryResponseDto dto = readQResponseDto(fileName);
+	public static QueryResponse readQResponse(String folder, String fileName) {
+		QueryResponseDto dto = readQResponseDto(folder, fileName);
 		
 		QueryResponse qr = ModelConverter.convert(dto);
 		return qr;
@@ -59,12 +60,13 @@ public class NewNewStorage extends BaseStorage{
 		return title;
 	}
 	
-	public static AnalyzedQueryResponseDto readAQRDto(String fileName) {
+	public static AnalyzedQueryResponseDto readAQRDto(String folder, String fileName) {
 		AnalyzedQueryResponseDto savedList = null;
 		
 		try {
 			savedList = mapper.readValue(new File(
-					Config.baseFolder2 +
+					Config.root + 
+					folder + "//" +
 					fileName + ".json"), AnalyzedQueryResponseDto.class);
 		} 
 		catch (JsonParseException e) {
@@ -79,8 +81,8 @@ public class NewNewStorage extends BaseStorage{
 		return savedList;
 	}
 	
-	public static AnalyzedQueryResponse readAnalisise(String fileName) {
-		AnalyzedQueryResponseDto dto = readAQRDto(fileName);
+	public static AnalyzedQueryResponse readAnalysis(String folder, String fileName) {
+		AnalyzedQueryResponseDto dto = readAQRDto(folder, fileName);
 		
 		AnalyzedQueryResponse qr = ModelConverter.convert(dto);
 		return qr;

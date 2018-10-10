@@ -17,8 +17,9 @@ public class AnalyzerRunner {
 		
 		long start = System.currentTimeMillis();
 		
-		stepOne();
-//		stepTwo();		
+//		stepOne();
+//		stepTwo();	
+		finalStep();
 
 		long elapsedTime = System.currentTimeMillis() - start;
 		
@@ -29,11 +30,11 @@ public class AnalyzerRunner {
 	public static void stepOne() {
 		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
 		List<String> saved = new ArrayList<String>();
-		List<String> error = new ArrayList<String>();
+		List<String> errors = new ArrayList<String>();
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
 		
 		for(String title : list) {
-			QueryResponse qr = NewNewStorage.readQResponse(title);
+			QueryResponse qr = NewNewStorage.readQResponse(RealRunner.baseFolder, title);
 //			System.out.println(qr.getObjects());
 			responses.add(qr);
 		}
@@ -49,13 +50,19 @@ public class AnalyzerRunner {
 			}
 			else {
 				String title = NewNewStorage.saveSingleAnalysis(baseFolder, item);
-				error.add(title);
+				errors.add(title);
 				System.out.println("danger, danger.");
 			}
 		}
 		
-		NewNewStorage.saveEntity(baseFolder, "__successX", saved);
-		NewNewStorage.saveEntity(baseFolder, "__errorX", error);
+		if(saved.size() > 0) {
+			NewNewStorage.saveEntity(baseFolder, "__successX", saved);
+		}
+		if(errors.size() > 0) {
+			NewNewStorage.saveEntity(baseFolder, "__errorX", errors);
+		}
+		
+		
 
 	}
 	
@@ -65,7 +72,7 @@ public class AnalyzerRunner {
 		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
 		
 		for(String title : list) {
-			QueryResponse qr = NewNewStorage.readQResponse(title);
+			QueryResponse qr = NewNewStorage.readQResponse(RealRunner.baseFolder, title);
 			if(qr.getObjects().size() > 0) {
 //				System.out.println(qr.getObjects());
 				AnalyzedQueryResponse analyzed = analyser.analyzeSingle(qr);
@@ -76,7 +83,24 @@ public class AnalyzerRunner {
 	}
 	
 	public static void finalStep() {
+		double sum = 0, counter = 0;
+		List<String> list = RealStorage.readList(baseFolder, "__successX");
 		
+		for(String title : list) {
+			AnalyzedQueryResponse aqr = NewNewStorage.readAnalysis(baseFolder, title);
+			if(!aqr.emptyResponse) {
+				sum = sum + aqr.unexpectednessScore;
+				counter++;
+			}
+		}
+		
+		double average = 0;
+		if(counter != 0) {
+			average = sum / counter;
+		}
+
+		System.out.println("unexpectedness equal to : " + average);
+		System.out.println("in a total of : " + counter);
 
 	}
 

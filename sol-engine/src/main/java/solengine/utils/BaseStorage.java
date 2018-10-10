@@ -14,23 +14,7 @@ import solengine.configuration.Config;
 
 public class BaseStorage {
 	
-	static ObjectMapper mapper = MapperFactory.initMapper(); 
-	
-
-//	public static void saveEntity(String fileName, Object entity) {		
-//		try {
-//			mapper.writeValue(new File(
-//					Config.baseFolder2 +
-//					fileName +".json"), entity);			
-//		} catch (JsonParseException e) {
-//			e.printStackTrace();
-//		} catch (JsonMappingException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}		
-//	}
-	
+	static ObjectMapper mapper = MapperFactory.initMapper(); 	
 
 	public static void saveEntity(String folder, String fileName, Object entity) {		
 		try {
@@ -56,7 +40,7 @@ public class BaseStorage {
 					Config.root + 
 					folder + "//" +
 					fileName +".json"), String[].class);
-			list = Arrays.asList(tempRead);
+			list.addAll(Arrays.asList(tempRead));
 		} 
 		catch (JsonParseException e) {
 			e.printStackTrace();
@@ -72,7 +56,7 @@ public class BaseStorage {
 	
 
 	public static void updateList(String folder, String fileName, String title){	
-		List<String> savedList = NewNewStorage.readList(folder, fileName);
+		List<String> savedList = readList(folder, fileName);
 		savedList.add(title);
 		saveEntity(folder, fileName, savedList);
 	}
