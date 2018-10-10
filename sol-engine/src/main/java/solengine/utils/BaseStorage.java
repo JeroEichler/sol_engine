@@ -17,25 +17,25 @@ public class BaseStorage {
 	static ObjectMapper mapper = MapperFactory.initMapper(); 
 	
 
-	public static void saveEntity(String fileName, Object entity) {		
-		try {
-			mapper.writeValue(new File(
-					Config.baseFolder2 +
-					fileName +".json"), entity);			
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
-	}
+//	public static void saveEntity(String fileName, Object entity) {		
+//		try {
+//			mapper.writeValue(new File(
+//					Config.baseFolder2 +
+//					fileName +".json"), entity);			
+//		} catch (JsonParseException e) {
+//			e.printStackTrace();
+//		} catch (JsonMappingException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}		
+//	}
 	
 
 	public static void saveEntity(String folder, String fileName, Object entity) {		
 		try {
 			mapper.writeValue(new File(
-					Config.root + "analysis//full//" +
+					Config.root + 
 					folder + "//" +
 					fileName +".json"), entity);			
 		} catch (JsonParseException e) {
@@ -53,7 +53,7 @@ public class BaseStorage {
 		
 		try {
 			String[] tempRead = mapper.readValue(new File(
-					Config.root + "full//" +
+					Config.root + 
 					folder + "//" +
 					fileName +".json"), String[].class);
 			list = Arrays.asList(tempRead);
@@ -74,7 +74,7 @@ public class BaseStorage {
 	public static void updateList(String folder, String fileName, String title){	
 		List<String> savedList = NewNewStorage.readList(folder, fileName);
 		savedList.add(title);
-		NewStorage.saveEntity(fileName, savedList);
+		saveEntity(folder, fileName, savedList);
 	}
 
 

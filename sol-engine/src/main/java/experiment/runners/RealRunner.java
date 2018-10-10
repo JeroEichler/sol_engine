@@ -12,6 +12,8 @@ public class RealRunner {
 	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
+	
+	public static String baseFolder = "full//genSeeAlsoSO";
 
 	public static void main(String[] args) {
 		theOneThatStoresBasicResults();
@@ -32,7 +34,7 @@ public class RealRunner {
 		}
 			
 		System.out.println("\n\n"+finalResult.size()+"--------------------------------->");
-		RealStorage.saveEntity(SmartRunner.baseListFile, finalResult);
+		RealStorage.saveEntity(baseFolder, SmartRunner.baseListFile, finalResult);
 			
 		long elapsedTime = System.currentTimeMillis() - start;
 		
@@ -56,7 +58,7 @@ public class RealRunner {
 
 	
 	private static void theOneThatReadsBasicResults() {
-		List<List<String>> listR = RealStorage.readListList(SmartRunner.baseFolder, SmartRunner.baseListFile);
+		List<List<String>> listR = RealStorage.readListList(baseFolder, SmartRunner.baseListFile);
 		for(List<String> r: listR) {
 			if(r.contains("http://dbpedia.org/resource/The_Beatles"))
 				System.out.println(r +"  "+ r.size());

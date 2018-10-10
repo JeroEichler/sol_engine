@@ -10,6 +10,8 @@ import solengine.utils.NewNewStorage;
 import solengine.utils.RealStorage;
 
 public class AnalyzerRunner {
+	
+	public static String baseFolder = "analysis//full//genSeeAlsoSO";
 
 	public static void main(String[] args) {
 		
@@ -25,7 +27,7 @@ public class AnalyzerRunner {
 	}
 	
 	public static void stepOne() {
-		List<String> list = RealStorage.readList("genSeeAlsoSO", "__successX");
+		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
 		List<String> saved = new ArrayList<String>();
 		List<String> error = new ArrayList<String>();
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
@@ -42,26 +44,25 @@ public class AnalyzerRunner {
 		for(AnalyzedQueryResponse item : analysis) {
 //			System.out.println(title.unexpectednessScore);
 			if(item.valid) {
-				String title = NewNewStorage.saveSingleAnalysis("genSeeAlsoSO", item);
+				String title = NewNewStorage.saveSingleAnalysis(baseFolder, item);
 				saved.add(title);
 			}
 			else {
-				String title = NewNewStorage.saveSingleAnalysis("genSeeAlsoSO", item);
+				String title = NewNewStorage.saveSingleAnalysis(baseFolder, item);
 				error.add(title);
 				System.out.println("danger, danger.");
 			}
 		}
 		
-		NewNewStorage.saveEntity("genSeeAlsoSO", "__successX", saved);
-		NewNewStorage.saveEntity("genSeeAlsoSO", "__errorX", error);
+		NewNewStorage.saveEntity(baseFolder, "__successX", saved);
+		NewNewStorage.saveEntity(baseFolder, "__errorX", error);
 
 	}
 	
 	public static void stepTwo() {
 		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
 		
-		List<String> list = RealStorage.readList("genSeeAlsoSO", "__successX");
-//		List<String> list = readList("__successX");
+		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
 		
 		for(String title : list) {
 			QueryResponse qr = NewNewStorage.readQResponse(title);
@@ -71,6 +72,11 @@ public class AnalyzerRunner {
 				System.out.println(analyzed.unexpectednessScore);
 			}
 		}
+
+	}
+	
+	public static void finalStep() {
+		
 
 	}
 

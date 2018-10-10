@@ -2,7 +2,6 @@ package solengine.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -14,9 +13,9 @@ import solengine.model.dto.QueryResponseDto;
 
 public class NewNewStorage extends BaseStorage{
 	
-	public static String saveSingleResult(String title, QueryResponse result){		
+	public static String saveSingleResult(String folder, String title, QueryResponse result){		
 		QueryResponseDto exportedResult = ModelConverter.convert(result);		
-		NewStorage.saveEntity(title, exportedResult);
+		saveEntity(folder, title, exportedResult);
 		return title;
 	}
 	
