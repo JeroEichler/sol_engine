@@ -13,7 +13,6 @@ import solengine.utils.StringFormatter;
 public class SmartRunner {
 	
 	static String baseListFile = "__userResults"; 
-	//static String baseFolder = "genSeeAlsoSO"; 
 	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
@@ -43,6 +42,7 @@ public class SmartRunner {
 				if(response.isValid()) {
 					NewNewStorage.saveSingleResult(RealRunner.baseFolder, title, response);
 					NewNewStorage.updateList(RealRunner.baseFolder, "__successX", title);
+					NewNewStorage.updateList(AnalyzerRunner.baseFolder, "__base", title);
 					RealStorage.reduceListList(RealRunner.baseFolder, baseListFile, result);
 
 					// pro form

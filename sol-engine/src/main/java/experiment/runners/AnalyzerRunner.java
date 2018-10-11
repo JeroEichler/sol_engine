@@ -11,20 +11,36 @@ import solengine.utils.RealStorage;
 
 public class AnalyzerRunner {
 	
-	public static String baseFolder = "analysis//full//genSeeAlsoSO";
+	public static String baseFolder = "analysis//full//" + RealRunner.baseProject;
 
 	public static void main(String[] args) {
 		
+		System.out.println("Here goes " + RealRunner.baseProject);
+		
 		long start = System.currentTimeMillis();
 		
+//		stepZero();
 //		stepOne();
-//		stepTwo();	
-		finalStep();
+		stepOne_B();	
+//		finalStep();
 
 		long elapsedTime = System.currentTimeMillis() - start;
 		
 		System.out.println("### Finished at "+elapsedTime/1000F+" seconds");
 
+	}
+	
+	public static void stepZero() {
+		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
+		List<QueryResponse> responses = new ArrayList<QueryResponse>();
+		
+		for(String title : list) {
+			QueryResponse qr = NewNewStorage.readQResponse(RealRunner.baseFolder, title);
+			if(qr.getObjects().size() > 0) {
+				responses.add(qr);
+			}
+		}
+		System.out.println(responses.size() + "!");
 	}
 	
 	public static void stepOne() {
@@ -66,20 +82,26 @@ public class AnalyzerRunner {
 
 	}
 	
-	public static void stepTwo() {
+	public static void stepOne_B() {		
 		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
 		
-		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
+		List<String> list = RealStorage.readList(baseFolder, "__base");
 		
 		for(String title : list) {
+			System.out.println(title);
 			QueryResponse qr = NewNewStorage.readQResponse(RealRunner.baseFolder, title);
-			if(qr.getObjects().size() > 0) {
 //				System.out.println(qr.getObjects());
-				AnalyzedQueryResponse analyzed = analyser.analyzeSingle(qr);
-				System.out.println(analyzed.unexpectednessScore);
+			AnalyzedQueryResponse analyzed = analyser.analyzeSingle(qr);
+//				System.out.println(analyzed.unexpectednessScore);
+			if(analyzed.valid) {
+				NewNewStorage.saveSingleAnalysis(baseFolder, analyzed);
+				NewNewStorage.updateList(baseFolder, "__successX", title);
+				NewNewStorage.reduceList(baseFolder, "__base", title);
 			}
+			else {
+				NewNewStorage.updateList(baseFolder, "__errorX", title);
+			}				
 		}
-
 	}
 	
 	public static void finalStep() {

@@ -49,7 +49,7 @@ public class ResultAnalysisOrchestrator {
 	}
 	
 	public AnalyzedQueryResponse analyzeSingle(QueryResponse  resultItem){
-		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
+		/*ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
         List<Future<AnalyzedQueryResponse>> temporaryResults = new ArrayList<>();
         AnalyzedQueryResponse analysisResult = new AnalyzedQueryResponse(resultItem);
 
@@ -71,6 +71,15 @@ public class ResultAnalysisOrchestrator {
 
 		executor.shutdown();
 		
-		return analysisResult;
+		return analysisResult;*/
+		
+		List<QueryResponse> results = new ArrayList<QueryResponse>();
+		results.add(resultItem);
+		
+		List<AnalyzedQueryResponse> analysis = this.analyzeList(results);
+		
+		AnalyzedQueryResponse analyzedResult = analysis.get(0);
+		
+		return analyzedResult;
 	}
 }
