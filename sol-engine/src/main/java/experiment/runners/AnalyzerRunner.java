@@ -8,10 +8,13 @@ import solengine.model.QueryResponse;
 import solengine.resultanalysis.ResultAnalysisOrchestrator;
 import solengine.utils.NewNewStorage;
 import solengine.utils.RealStorage;
+import solengine.utils.StringFormatter;
 
 public class AnalyzerRunner {
 	
 	public static String baseFolder = "analysis//full//" + RealRunner.baseProject;
+		
+	static int progress=0;
 
 	public static void main(String[] args) {
 		
@@ -20,8 +23,8 @@ public class AnalyzerRunner {
 		long start = System.currentTimeMillis();
 		
 //		stepZero();
-//		stepOne();
-		stepOne_B();	
+		stepOne();
+//		stepOne_B();	
 //		finalStep();
 
 		long elapsedTime = System.currentTimeMillis() - start;
@@ -43,10 +46,10 @@ public class AnalyzerRunner {
 		System.out.println(responses.size() + "!");
 	}
 	
-	public static void stepOne() {
-		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__successX");
-		List<String> saved = new ArrayList<String>();
-		List<String> errors = new ArrayList<String>();
+	public static void stepOne() {		
+		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
+		
+		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__base");
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
 		
 		for(String title : list) {
@@ -54,32 +57,13 @@ public class AnalyzerRunner {
 //			System.out.println(qr.getObjects());
 			responses.add(qr);
 		}
-		
-		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
 		List<AnalyzedQueryResponse> analysis = analyser.analyzeList(responses);
 		
 		for(AnalyzedQueryResponse item : analysis) {
 //			System.out.println(title.unexpectednessScore);
-			if(item.valid) {
-				String title = NewNewStorage.saveSingleAnalysis(baseFolder, item);
-				saved.add(title);
-			}
-			else {
-				String title = NewNewStorage.saveSingleAnalysis(baseFolder, item);
-				errors.add(title);
-				System.out.println("danger, danger.");
-			}
+			printProgress();
+			persistAnalysis(item);	
 		}
-		
-		if(saved.size() > 0) {
-			NewNewStorage.saveEntity(baseFolder, "__successX", saved);
-		}
-		if(errors.size() > 0) {
-			NewNewStorage.saveEntity(baseFolder, "__errorX", errors);
-		}
-		
-		
-
 	}
 	
 	public static void stepOne_B() {		
@@ -90,20 +74,24 @@ public class AnalyzerRunner {
 		for(String title : list) {
 			System.out.println(title);
 			QueryResponse qr = NewNewStorage.readQResponse(RealRunner.baseFolder, title);
-//				System.out.println(qr.getObjects());
 			AnalyzedQueryResponse analyzed = analyser.analyzeSingle(qr);
-//				System.out.println(analyzed.unexpectednessScore);
-			if(analyzed.valid) {
-				NewNewStorage.saveSingleAnalysis(baseFolder, analyzed);
-				NewNewStorage.updateList(baseFolder, "__successX", title);
-				NewNewStorage.reduceList(baseFolder, "__base", title);
-			}
-			else {
-				NewNewStorage.updateList(baseFolder, "__errorX", title);
-			}				
+			persistAnalysis(analyzed);				
 		}
 	}
 	
+	private static void persistAnalysis(AnalyzedQueryResponse analyzed) {
+		String title = StringFormatter.clean(analyzed.queryResponse.getResult());
+		if(analyzed.valid) {
+			NewNewStorage.saveSingleAnalysis(baseFolder, analyzed);
+			NewNewStorage.updateList(baseFolder, "__successX", title);
+			NewNewStorage.reduceList(baseFolder, "__base", title);
+		}
+		else {
+			NewNewStorage.updateList(baseFolder, "__errorX", title);
+			System.out.println("danger, danger.");
+		}	
+	}
+
 	public static void finalStep() {
 		double sum = 0, counter = 0;
 		List<String> list = RealStorage.readList(baseFolder, "__successX");
@@ -126,4 +114,12 @@ public class AnalyzerRunner {
 
 	}
 
+
+	
+	private static void printProgress() {
+		if(progress % 500 == 0) {
+			System.out.println("passed by "+progress);
+		}
+		progress++;
+	}
 }
