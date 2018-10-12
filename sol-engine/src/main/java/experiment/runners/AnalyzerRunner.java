@@ -23,8 +23,9 @@ public class AnalyzerRunner {
 		long start = System.currentTimeMillis();
 		
 //		stepZero();
-		stepOne();
+//		stepOne();
 //		stepOne_B();	
+		realFinalStep();
 //		finalStep();
 
 		long elapsedTime = System.currentTimeMillis() - start;
@@ -49,7 +50,7 @@ public class AnalyzerRunner {
 	public static void stepOne() {		
 		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
 		
-		List<String> list = RealStorage.readList(RealRunner.baseFolder, "__base");
+		List<String> list = RealStorage.readList(baseFolder, "__base");
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
 		
 		for(String title : list) {
@@ -113,11 +114,23 @@ public class AnalyzerRunner {
 		System.out.println("in a total of : " + counter);
 
 	}
+	
+
+	public static void realFinalStep() {
+
+		for(int i=1; i<6; i++) {
+			System.out.println("Here goes " + RealRunner.names[i]);
+			baseFolder = "analysis//full//" +  RealRunner.names[i];
+			finalStep();
+			System.out.println("-------------------------------------");
+		}
+
+	}
 
 
 	
 	private static void printProgress() {
-		if(progress % 500 == 0) {
+		if(progress % 1000 == 0) {
 			System.out.println("passed by "+progress);
 		}
 		progress++;

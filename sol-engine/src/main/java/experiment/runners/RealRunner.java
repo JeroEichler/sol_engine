@@ -23,7 +23,7 @@ public class RealRunner {
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
-	public static String baseProject = names[3];
+	public static String baseProject = names[1];
 	public static String baseFolder = "full//" + baseProject;
 
 	public static void main(String[] args) {
