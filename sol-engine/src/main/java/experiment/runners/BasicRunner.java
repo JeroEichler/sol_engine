@@ -9,7 +9,6 @@ import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
 import solengine.model.Vocabulary;
 import solengine.zz.storage.NewStorage;
-import solengine.zz.storage.Storage;
 
 public class BasicRunner {
 	
@@ -50,7 +49,6 @@ public class BasicRunner {
 			elapsedTimeMicro/1000F+" seconds, "+
 			elapsedTimeTotal/(60*1000F)+" total. "
 			);
-			Storage.saveProgress("C:/nada/2018sep/progressoX.txt", i);
 		}
 		
 		long elapsedTime = System.currentTimeMillis() - start;

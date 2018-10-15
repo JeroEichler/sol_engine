@@ -6,7 +6,6 @@ import java.util.List;
 import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
 import solengine.model.Vocabulary;
-import solengine.zz.storage.Storage;
 
 /************************************************************************************************************
  * Crawler to query a single endpoint, in a breadth first manner
@@ -42,7 +41,6 @@ public class RetrievalRunner {
 			elapsedTimeMicro/1000F+" seconds, "+
 			elapsedTimeTotal/(60*1000F)+" total. "
 			);
-			Storage.saveProgress("C:/nada/2017ago/progresso.txt", i);
 		}
 		
 		long elapsedTime = System.currentTimeMillis() - start;
