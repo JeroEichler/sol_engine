@@ -105,5 +105,18 @@ public class EngineInterface {
 		}
 		return results;		
 	}
+	
+
+	
+	public List<QueryResponse> findResponses(List<List<String>> queryResult, List<String> addresses){
+		List<QueryResponse> results = new ArrayList<QueryResponse>();
+		this.datasets = this.initDatasetOrchestrator(addresses);
+
+		for(DatasetOrchestrator datasetOrchestrator : datasets){
+			Map<List<String>, QueryResponse> completeResponse = datasetOrchestrator.getResponses(queryResult);
+			results.addAll(completeResponse.values());
+		}
+		return results;		
+	}
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
 import solengine.model.Vocabulary;
-import solengine.utils.Storage;
+import solengine.zz.storage.Storage;
 
 /************************************************************************************************************
  * Crawler to query a single endpoint, in a breadth first manner

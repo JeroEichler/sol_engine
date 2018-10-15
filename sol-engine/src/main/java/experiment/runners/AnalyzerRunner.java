@@ -3,12 +3,13 @@ package experiment.runners;
 import java.util.ArrayList;
 import java.util.List;
 
+import solengine.datasetorchestration.ResultAnalysisOrchestrator;
 import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
-import solengine.resultanalysis.ResultAnalysisOrchestrator;
-import solengine.utils.NewNewStorage;
-import solengine.utils.RealStorage;
+import solengine.model.Vocabulary;
 import solengine.utils.StringFormatter;
+import solengine.zz.storage.NewNewStorage;
+import solengine.zz.storage.RealStorage;
 
 public class AnalyzerRunner {
 	
@@ -48,7 +49,7 @@ public class AnalyzerRunner {
 	}
 	
 	public static void stepOne() {		
-		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
+		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator(Vocabulary.DBpediaEndpoint);
 		
 		List<String> list = RealStorage.readList(baseFolder, "__base");
 		List<QueryResponse> responses = new ArrayList<QueryResponse>();
@@ -68,7 +69,7 @@ public class AnalyzerRunner {
 	}
 	
 	public static void stepOne_B() {		
-		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator();
+		ResultAnalysisOrchestrator analyser = new ResultAnalysisOrchestrator(Vocabulary.DBpediaEndpoint);
 		
 		List<String> list = RealStorage.readList(baseFolder, "__base");
 		

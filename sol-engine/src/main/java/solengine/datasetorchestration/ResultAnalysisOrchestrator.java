@@ -1,4 +1,4 @@
-package solengine.resultanalysis;
+package solengine.datasetorchestration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +9,36 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
+import solengine.model.Vocabulary;
+import solengine.resultanalysis.ResultItemAnalyzer;
 
 
+/* ***************************************************************************************************************
+ * Class that encompasses the orchestration process of the QueryResponse analysis.
+ *  
+ * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QBOrchestrator
+ * 												// works with.
+ * 
+ *****************************************************************************************************************/
 public class ResultAnalysisOrchestrator {
+	
+	private String datasetEndpoint = Vocabulary.EmptyString;
+	
+	public ResultAnalysisOrchestrator(String endpoint) {
+		this.datasetEndpoint = endpoint;
+	}
 
 	public List<AnalyzedQueryResponse> analyzeList(List<QueryResponse>  results){
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
         List<Future<AnalyzedQueryResponse>> temporaryResults = new ArrayList<>();
         List<AnalyzedQueryResponse> analysisResults = new ArrayList<>();
-//		int k =0;
+        
 		for(QueryResponse resultItem : results){
 			if(resultItem.getObjects().size() > 0) {
-				ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem);
+				// MAP STEP: for each QueryResponse item, a ResultItemAnalyzer executor will be dispatch to compute
+				//// the score of the QueryResponse.
+				ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem, this.datasetEndpoint);
 				temporaryResults.add(executor.submit(analyzer));
-//				System.out.println(k++ + " dispatched.");
 			}
 			else {
 				AnalyzedQueryResponse not_analyzed = new AnalyzedQueryResponse(resultItem);
@@ -34,6 +50,7 @@ public class ResultAnalysisOrchestrator {
         {
               try
               {
+            	  // REDUCE STEP: all AnalyzedQueryResponse are added to the analysisResults.
             	  AnalyzedQueryResponse analysis = future.get();
             	  analysisResults.add(analysis);
               } 
@@ -49,29 +66,6 @@ public class ResultAnalysisOrchestrator {
 	}
 	
 	public AnalyzedQueryResponse analyzeSingle(QueryResponse  resultItem){
-		/*ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
-        List<Future<AnalyzedQueryResponse>> temporaryResults = new ArrayList<>();
-        AnalyzedQueryResponse analysisResult = new AnalyzedQueryResponse(resultItem);
-
-        ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem);
-        temporaryResults.add(executor.submit(analyzer));
-
-		for(Future<AnalyzedQueryResponse> future : temporaryResults)
-        {
-              try
-              {
-            	  AnalyzedQueryResponse analysis = future.get();
-            	  analysisResult = analysis;
-              } 
-              catch (InterruptedException | ExecutionException e) 
-              {
-                  e.printStackTrace();
-              }
-          }
-
-		executor.shutdown();
-		
-		return analysisResult;*/
 		
 		List<QueryResponse> results = new ArrayList<QueryResponse>();
 		results.add(resultItem);

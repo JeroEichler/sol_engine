@@ -19,7 +19,7 @@ import solengine.queryexecution.UserQueryExecutor;
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of a set of QueryExecutors.
  *  
- * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QBOrchestrator
+ * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QEOrchestrator
  * 												// works with.
  * 				(2) Map<List<String>,QueryResponse>		
  * 						queryResults;			// represents the final result of the execution of the query 
@@ -51,6 +51,21 @@ public class QEOrchestrator {
 	 *****************************************************************************************************************/
 	public Map<List<String>, QueryResponse> processQuery(String queryString){
 		List<List<String>> originalResults = usrQueryExecutor.queryEndpoint(datasetEndpoint, queryString);
+		
+		return this.findResponses(originalResults);
+		
+	}
+	
+	/* ***************************************************************************************************************
+	 * Function that find QueryResponse of pre-computed list of retrieved results.
+	 * 
+	 * Parameters:	(1) List<List<String>> originalResults;  	// represents the results retrieved in a previously
+	 * 															// submitted query.
+	 *
+	 * Returns: 	(2) Map<List<String>, QueryResponse>.		// represents a HashMap of QueryResponses indexed by 
+	 * 															// the result string.
+	 *****************************************************************************************************************/
+	public Map<List<String>, QueryResponse> findResponses(List<List<String>> originalResults){
 		
 		List<QueryExecutorTypeEnum> qExecutorNames = DatasetOrchestConfigurator.buildQueryExecutorList(datasetEndpoint);
 		

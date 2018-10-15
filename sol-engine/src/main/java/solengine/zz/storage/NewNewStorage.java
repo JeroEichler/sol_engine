@@ -1,4 +1,4 @@
-package solengine.utils;
+package solengine.zz.storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
 import solengine.model.dto.AnalyzedQueryResponseDto;
 import solengine.model.dto.QueryResponseDto;
+import solengine.utils.ModelConverter;
+import solengine.utils.StringFormatter;
 
 public class NewNewStorage extends BaseStorage{
 	

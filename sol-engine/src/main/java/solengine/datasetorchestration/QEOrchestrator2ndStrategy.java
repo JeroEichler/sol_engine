@@ -19,7 +19,7 @@ import solengine.queryexecution.UserQueryExecutor;
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of a set of QueryExecutors.
  *  
- * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QBOrchestrator
+ * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QEOrchestrator
  * 												// works with.
  * 				(2) Map<List<String>,QueryResponse>		
  * 						queryResults;			// represents the final result of the execution of the query 
@@ -61,7 +61,6 @@ public class QEOrchestrator2ndStrategy {
 		
 	}
 	
-	// TODO: evaluate necessity.
 	/* ***************************************************************************************************************
 	 * Function that initializes the queryResult propery in order to clear any garbage from previous requestd.
 	 * 
@@ -104,7 +103,7 @@ public class QEOrchestrator2ndStrategy {
 	}
 	
 	/* ***************************************************************************************************************
-	 * Function that provides the complete execution of a query.
+	 * Function that captures a QueryResponse about a result.
 	 * 
 	 * Parameters:	(1) List<String> result;  		// represents the result that need additional information.
 	 * Returns: 	(2) QueryResponse.				// represents the result aggregated with additional information.

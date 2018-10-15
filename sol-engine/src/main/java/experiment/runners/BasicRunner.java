@@ -8,8 +8,8 @@ import solengine.configuration.Config;
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
 import solengine.model.Vocabulary;
-import solengine.utils.NewStorage;
-import solengine.utils.Storage;
+import solengine.zz.storage.NewStorage;
+import solengine.zz.storage.Storage;
 
 public class BasicRunner {
 	

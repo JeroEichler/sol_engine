@@ -5,6 +5,7 @@ import java.util.Map;
 
 import solengine.model.QueryResponse;
 import solengine.model.Vocabulary;
+import solengine.queryexecution.QueryExecutorTypeEnum;
 import solengine.queryexecution.UserQueryExecutor;
 
 public class DatasetOrchestrator {
@@ -15,6 +16,8 @@ public class DatasetOrchestrator {
 	
 	QEOrchestrator2ndStrategy qExecutorOrchestrator;
 	
+	QEOrchestrator optimQExecutorOrchestrator;
+	
 	QBOrchestrator qbuilderOrchestrator;
 
 	public DatasetOrchestrator(String address) {
@@ -22,10 +25,15 @@ public class DatasetOrchestrator {
 		this.usrQueryExecutor = new UserQueryExecutor();
 		
 		this.qExecutorOrchestrator = new QEOrchestrator2ndStrategy(address);
+		this.optimQExecutorOrchestrator = new QEOrchestrator(address);
 		this.qbuilderOrchestrator = new QBOrchestrator(address);
 	}
 	
-	public Map<List<String>, QueryResponse> processQuery(String queryString){		
+	public Map<List<String>, QueryResponse> processQuery(String queryString){	
+		List<QueryExecutorTypeEnum> qExecutorNames = DatasetOrchestConfigurator.buildQueryExecutorList(datasetEndpoint);
+		if(qExecutorNames.size() == 1) {
+			return this.optimQExecutorOrchestrator.processQuery(queryString);
+		}
 		return this.qExecutorOrchestrator.processQuery(queryString);		
 	}
 	
@@ -38,10 +46,12 @@ public class DatasetOrchestrator {
 		return this.qbuilderOrchestrator.generateQueries(query);
 	}
 	
-
-	
 	public QueryResponse getResponse(List<String> baseResult){		
 		return this.qExecutorOrchestrator.getResponse(baseResult);		
+	}
+	
+	public Map<List<String>, QueryResponse> getResponses(List<List<String>> baseResult){		
+		return this.optimQExecutorOrchestrator.findResponses(baseResult);		
 	}
 
 }

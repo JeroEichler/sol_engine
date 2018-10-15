@@ -17,14 +17,14 @@ public class DatasetOrchestConfigurator {
 		QESystemConfiguration qeConfig = Config.qeConfiguration;
 		
 		// IF DBpedia
-		if(dataset == Vocabulary.DBpediaEndpoint) {
+//		if(dataset == Vocabulary.DBpediaEndpoint) {
 			if(qeConfig.InfluenceAnalogy) {
 				types.add(QueryExecutorTypeEnum.InfluenceAnalogy);
 			}
 			if(qeConfig.AssociationSurprisingObservation) {
 				types.add(QueryExecutorTypeEnum.AssociationSurprisingObservation);
 			}
-		}
+//		}
 		
 //		//IF ANY Dataset
 		if(qeConfig.SeeAlsoSurprisingObservation) {	

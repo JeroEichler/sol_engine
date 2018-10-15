@@ -22,17 +22,20 @@ import solengine.model.Vocabulary;
 
 public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 
-	private String endpoint = Vocabulary.DBpediaEndpoint;
+	private String datasetEndpoint = Vocabulary.DBpediaEndpoint;
 	private QueryResponse result;
 
-	public ResultItemAnalyzer(QueryResponse resultItem) {
+	public ResultItemAnalyzer(QueryResponse resultItem, String endpoint) {
 		this.result = resultItem;
+		this.datasetEndpoint = endpoint;
 	}
 
 	@Override
 	public AnalyzedQueryResponse call(){
 		if(!result.isValid()){
-			return new AnalyzedQueryResponse(this.result);
+			AnalyzedQueryResponse analyzed = new AnalyzedQueryResponse(this.result);
+			analyzed.valid = false;
+			return analyzed;
 		}
 		
 		AnalyzedQueryResponse analysis = new AnalyzedQueryResponse(this.result);
@@ -75,7 +78,7 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 	private List<String> getDataAboutResource(String resource){
 		String queryString = this.buildQueryStringFromResource(resource);
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
-        try ( QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint , query) ) {
+        try ( QueryExecution qexec = QueryExecutionFactory.sparqlService(datasetEndpoint , query) ) {
             ((QueryEngineHTTP)qexec).addParam("timeout", "10000") ;
 
             // Execute.

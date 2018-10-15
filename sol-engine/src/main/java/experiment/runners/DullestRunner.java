@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import solengine.utils.NewStorage;
+import solengine.zz.storage.NewStorage;
 
 public class DullestRunner {
 

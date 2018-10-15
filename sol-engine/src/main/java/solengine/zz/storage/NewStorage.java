@@ -1,4 +1,4 @@
-package solengine.utils;
+package solengine.zz.storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import solengine.configuration.Config;
 import solengine.model.QueryResponse;
 import solengine.model.dto.QueryResponseDto;
+import solengine.utils.MapperFactory;
+import solengine.utils.ModelConverter;
+import solengine.utils.StringFormatter;
 
 public class NewStorage {
 

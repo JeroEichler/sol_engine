@@ -1,4 +1,4 @@
-package solengine.utils;
+package solengine.zz.storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import solengine.configuration.Config;
+import solengine.utils.MapperFactory;
 
 public class BaseStorage {
 	

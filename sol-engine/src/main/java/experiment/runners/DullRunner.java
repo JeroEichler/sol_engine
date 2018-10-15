@@ -6,7 +6,7 @@ import java.util.List;
 
 import solengine.frontier.EngineInterface;
 import solengine.model.Vocabulary;
-import solengine.utils.NewStorage;
+import solengine.zz.storage.NewStorage;
 
 public class DullRunner {
 	

@@ -6,11 +6,11 @@ import java.util.List;
 
 import solengine.frontier.EngineInterface;
 import solengine.model.Vocabulary;
-import solengine.utils.RealStorage;
+import solengine.zz.storage.RealStorage;
 
 public class RealRunner {
 	
-	static int magicNumer = 4;
+	static int magicNumer = 0;
 	
 	static String[] names = {
 			"all",				// 0
@@ -35,8 +35,11 @@ public class RealRunner {
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
+	public static String queryOn = query[0];
+	public static String modeOn = mode[1];
 	public static String baseProject = names[magicNumer];
-	public static String baseFolder = query[1] + "//" + mode[0] +"//" + baseProject;
+	
+	public static String baseFolder = queryOn + "//" + modeOn +"//" + baseProject;
 	
 	static String baseListFile = "__userResults"; 
 
@@ -53,7 +56,7 @@ public class RealRunner {
 		long start = System.currentTimeMillis();
 		
 		for(int i=0; i<10000; i=i+10000) {
-			List<List<String>> result = system.ordinaryProcess(bandQuery(i), datasetAddresses);
+			List<List<String>> result = system.ordinaryProcess(makeQuery(i), datasetAddresses);
 			finalResult.addAll(result);
 			System.out.println(finalResult.size()+"=====================================>");
 		}
@@ -68,24 +71,14 @@ public class RealRunner {
 	}
 	
 
-	private static String bandQuery(int offset) {
-		//int actualOffset = 10000 * offset;
+	private static String makeQuery(int offset) {
+		String type = "http://dbpedia.org/ontology/Band";
+		if(queryOn.equals("m-artist")) {
+			type = "http://dbpedia.org/ontology/MusicalArtist";
+		}
 		String userQuery = 
 	            "SELECT ?subject where {" + 
-	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <http://dbpedia.org/ontology/Band> ." + 
-	                    "} " + 
-	                    "LIMIT 10000 " + 
-	                    "OFFSET " + offset + " "	                    
-	                    ;
-		
-		return userQuery;
-	}
-	
-	private static String musicArtistQuery(int offset) {
-		//int actualOffset = 10000 * offset;
-		String userQuery = 
-	            "SELECT ?subject where {" + 
-	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <http://dbpedia.org/ontology/MusicalArtist> ." + 
+	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <" + type + "> ." + 
 	                    "} " + 
 	                    "LIMIT 10000 " + 
 	                    "OFFSET " + offset + " "	                    
