@@ -3,6 +3,8 @@ package experiment.runners;
 import java.util.Arrays;
 import java.util.List;
 
+import solengine.configuration.Config;
+import solengine.configuration.QESystemConfiguration;
 import solengine.frontier.EngineInterface;
 import solengine.model.QueryResponse;
 import solengine.model.Vocabulary;
@@ -12,14 +14,18 @@ import solengine.utils.StringFormatter;
 
 public class SmartRunner {
 	
-	static String baseListFile = "__userResults"; 
-	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 		
 	static int i=0;
 
 	public static void main(String[] args) {
+		
+		Config.qeConfiguration = new QESystemConfiguration(RealRunner.magicNumer);
+//		Config.setLimit(1);
+		
+		System.out.println("Here goes " + RealRunner.baseFolder);
+		
 		long start = System.currentTimeMillis();
 		doIt();
 
@@ -33,7 +39,7 @@ public class SmartRunner {
 
 
 	private static void doIt() {
-		List<List<String>> baseResults = RealStorage.readListList(RealRunner.baseFolder, baseListFile);
+		List<List<String>> baseResults = RealStorage.readListList(RealRunner.baseFolder, RealRunner.baseListFile);
 		System.out.println("starting with "+baseResults.size());
 		for(List<String> result : baseResults) {
 			List<QueryResponse> responses = system.findResponse(result, datasetAddresses);
@@ -43,7 +49,7 @@ public class SmartRunner {
 					NewNewStorage.saveSingleResult(RealRunner.baseFolder, title, response);
 					NewNewStorage.updateList(RealRunner.baseFolder, "__successX", title);
 					NewNewStorage.updateList(AnalyzerRunner.baseFolder, "__base", title);
-					RealStorage.reduceListList(RealRunner.baseFolder, baseListFile, result);
+					RealStorage.reduceListList(RealRunner.baseFolder, RealRunner.baseListFile, result);
 
 					// pro form
 					printProgress();
@@ -63,7 +69,4 @@ public class SmartRunner {
 		}
 		i++;
 	}
-	
-
-
 }

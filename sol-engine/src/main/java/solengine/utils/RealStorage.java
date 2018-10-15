@@ -43,7 +43,8 @@ public class RealStorage extends BaseStorage {
 		baseList.remove(itemSaved);
 		try {
 			mapper.writeValue(new File(
-					Config.baseFolder2 +
+					Config.root + 
+					folder + "//" +
 					fileName +".json"), baseList);			
 		} catch (JsonParseException e) {
 			e.printStackTrace();

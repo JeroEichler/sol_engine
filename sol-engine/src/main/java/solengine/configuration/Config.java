@@ -14,6 +14,17 @@ public class Config {
 	
 	public static final String rdfFormat = "N-TRIPLES";
 	
+	public static QESystemConfiguration qeConfiguration = new QESystemConfiguration(0);
+	
+	public static boolean qeLimited = false;
+	
+	public static int limit = 2;
+	
+	public static void setLimit(int value) {
+		qeLimited = true;		
+		limit = value;
+	}
+	
 	private static final Properties prop = buildProperties();
 	
 	public static String listDelimiter() {

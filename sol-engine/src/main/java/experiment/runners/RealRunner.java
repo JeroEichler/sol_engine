@@ -10,21 +10,35 @@ import solengine.utils.RealStorage;
 
 public class RealRunner {
 	
+	static int magicNumer = 4;
+	
 	static String[] names = {
-			"all",
-			"genAnalogy",
-			"genDiffInversion",
-			"genSameAsSO",
-			"genSeeAlsoSO",
-			"musicAssocSO",
-			"musicInflAnalogy"
+			"all",				// 0
+			"genAnalogy",		// 1
+			"genDiffInversion",	// 2
+			"genSameAsSO",		// 3
+			"genSeeAlsoSO",		// 4
+			"musicAssocSO",		// 5
+			"musicInflAnalogy"	// 6
+		};
+		
+	static String[] query = {
+			"band",
+			"m-artist"
+		};
+	
+	static String[] mode = {
+			"full",
+			"limited"
 		};
 	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
-	public static String baseProject = names[1];
-	public static String baseFolder = "full//" + baseProject;
+	public static String baseProject = names[magicNumer];
+	public static String baseFolder = query[1] + "//" + mode[0] +"//" + baseProject;
+	
+	static String baseListFile = "__userResults"; 
 
 	public static void main(String[] args) {
 		theOneThatStoresBasicResults();
@@ -39,13 +53,13 @@ public class RealRunner {
 		long start = System.currentTimeMillis();
 		
 		for(int i=0; i<10000; i=i+10000) {
-			List<List<String>> result = system.ordinaryProcess(basicLimitedQuery(i), datasetAddresses);
+			List<List<String>> result = system.ordinaryProcess(bandQuery(i), datasetAddresses);
 			finalResult.addAll(result);
 			System.out.println(finalResult.size()+"=====================================>");
 		}
 			
 		System.out.println("\n\n"+finalResult.size()+"--------------------------------->");
-		RealStorage.saveEntity(baseFolder, SmartRunner.baseListFile, finalResult);
+		RealStorage.saveEntity(baseFolder, baseListFile, finalResult);
 			
 		long elapsedTime = System.currentTimeMillis() - start;
 		
@@ -54,7 +68,7 @@ public class RealRunner {
 	}
 	
 
-	private static String basicLimitedQuery(int offset) {
+	private static String bandQuery(int offset) {
 		//int actualOffset = 10000 * offset;
 		String userQuery = 
 	            "SELECT ?subject where {" + 
@@ -66,10 +80,23 @@ public class RealRunner {
 		
 		return userQuery;
 	}
+	
+	private static String musicArtistQuery(int offset) {
+		//int actualOffset = 10000 * offset;
+		String userQuery = 
+	            "SELECT ?subject where {" + 
+	                    "	?subject <"+Vocabulary.Rdf_TypeProperty+"> <http://dbpedia.org/ontology/MusicalArtist> ." + 
+	                    "} " + 
+	                    "LIMIT 10000 " + 
+	                    "OFFSET " + offset + " "	                    
+	                    ;
+		
+		return userQuery;
+	}
 
 	
 	private static void theOneThatReadsBasicResults() {
-		List<List<String>> listR = RealStorage.readListList(baseFolder, SmartRunner.baseListFile);
+		List<List<String>> listR = RealStorage.readListList(baseFolder, baseListFile);
 		for(List<String> r: listR) {
 			if(r.contains("http://dbpedia.org/resource/The_Beatles"))
 				System.out.println(r +"  "+ r.size());

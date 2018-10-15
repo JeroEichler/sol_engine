@@ -12,7 +12,7 @@ import solengine.utils.StringFormatter;
 
 public class AnalyzerRunner {
 	
-	public static String baseFolder = "analysis//full//" + RealRunner.baseProject;
+	public static String baseFolder = "analysis//" + RealRunner.baseFolder;
 		
 	static int progress=0;
 
@@ -23,9 +23,9 @@ public class AnalyzerRunner {
 		long start = System.currentTimeMillis();
 		
 //		stepZero();
-//		stepOne();
+		stepOne();
 //		stepOne_B();	
-		realFinalStep();
+//		realFinalStep();
 //		finalStep();
 
 		long elapsedTime = System.currentTimeMillis() - start;

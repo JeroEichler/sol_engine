@@ -36,8 +36,8 @@ public abstract class QueryExecutor extends QueryElement implements IQueryExecut
 	 *****************************************************************************************************************/
 	@Override
 	public QueryResponse call() throws Exception {
-		if(Config.queryExecutorLimited() || this.limitedQueryExecutor || this.isBasicType()) {
-			queryString = queryString +" LIMIT 2 ";
+		if(Config.qeLimited || this.limitedQueryExecutor || this.isBasicType()) {
+			queryString = queryString +" LIMIT " +Config.limit + " ";
 		}
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
         try ( QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query) ) {
