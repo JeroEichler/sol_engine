@@ -9,9 +9,7 @@ import java.util.Properties;
 public class Config {
 
 	public static final String baseFolder = "C:/solengine/experiment/";
-	public static final String root = "C://solengine//data//";
-	public static final String baseFolder2 = root+"full//genSeeAlsoSO//";
-	
+		
 	public static final String rdfFormat = "N-TRIPLES";
 	
 	public static QESystemConfiguration qeConfiguration = new QESystemConfiguration(0);

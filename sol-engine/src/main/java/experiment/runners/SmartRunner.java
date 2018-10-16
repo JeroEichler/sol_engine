@@ -35,6 +35,7 @@ public class SmartRunner {
 		long elapsedTime = System.currentTimeMillis() - start;
 		
 		System.out.println("### Finished at "+elapsedTime/1000F+" seconds");
+		System.out.println("Here lies " + RealRunner.baseFolder);
 	}
 	
 

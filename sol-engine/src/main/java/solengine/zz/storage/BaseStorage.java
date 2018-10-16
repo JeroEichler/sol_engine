@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import solengine.configuration.Config;
 import solengine.utils.MapperFactory;
 
 public class BaseStorage {
@@ -50,7 +49,10 @@ public class BaseStorage {
 			e.printStackTrace();
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Erro de leitura : " + Config.root + 
+					folder + "//" +
+					fileName +".json");
 		}
 		return list;
 	}

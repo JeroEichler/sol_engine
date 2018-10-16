@@ -10,7 +10,7 @@ import solengine.zz.storage.RealStorage;
 
 public class RealRunner {
 	
-	static int magicNumer = 0;
+	static int magicNumer = 4;
 	
 	static String[] names = {
 			"all",				// 0
@@ -28,15 +28,15 @@ public class RealRunner {
 		};
 	
 	static String[] mode = {
-			"full",
-			"limited"
+			"limited",
+			"full"
 		};
 	
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
-	public static String queryOn = query[0];
-	public static String modeOn = mode[1];
+	public static String queryOn = query[1];
+	public static String modeOn = mode[0];
 	public static String baseProject = names[magicNumer];
 	
 	public static String baseFolder = queryOn + "//" + modeOn +"//" + baseProject;
