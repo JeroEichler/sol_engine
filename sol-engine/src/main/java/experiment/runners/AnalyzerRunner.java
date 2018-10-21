@@ -24,9 +24,9 @@ public class AnalyzerRunner {
 		long start = System.currentTimeMillis();
 		
 //		stepZero();
-		stepOne();
+//		stepOne();
 //		stepOne_B();	
-//		realFinalStep();
+		realFinalStep();
 //		finalStep();
 
 		long elapsedTime = System.currentTimeMillis() - start;
@@ -119,9 +119,9 @@ public class AnalyzerRunner {
 
 	public static void realFinalStep() {
 
-		for(int i=1; i<6; i++) {
+		for(int i=0; i<7; i++) {
 			System.out.println("Here goes " + RealRunner.names[i]);
-			baseFolder = "analysis//full//" +  RealRunner.names[i];
+			baseFolder = "analysis//" + RealRunner.queryOn + "//" + RealRunner.modeOn +"//" +  RealRunner.names[i];
 			finalStep();
 			System.out.println("-------------------------------------");
 		}

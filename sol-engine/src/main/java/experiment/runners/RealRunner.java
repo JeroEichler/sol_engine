@@ -35,7 +35,7 @@ public class RealRunner {
 	static EngineInterface system = new EngineInterface();
 	static List<String> datasetAddresses =  Arrays.asList(Vocabulary.DBpediaEndpoint);
 
-	public static String queryOn = query[1];
+	public static String queryOn = query[0];
 	public static String modeOn = mode[1];
 	public static String baseProject = names[magicNumer];
 	
