@@ -71,6 +71,9 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 		analysis.additionalInfoLabels = additionalInfoLabels;
 		
 		analysis.unexpectednessScore = this.computeSimilarity(resultLabels, additionalInfoLabels);
+		if(analysis.unexpectednessScore < 0) {
+			analysis.valid = false;
+		}
 		
 		return analysis;
 	}
