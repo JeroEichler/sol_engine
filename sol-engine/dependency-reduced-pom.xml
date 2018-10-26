@@ -4,7 +4,7 @@
   <groupId>eichler.jeronimo</groupId>
   <artifactId>sol-engine</artifactId>
   <name>sol-engine</name>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>
@@ -16,6 +16,13 @@
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>2.3</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
       </plugin>
     </plugins>
   </build>

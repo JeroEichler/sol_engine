@@ -1,6 +1,7 @@
 package solengine.resultanalysis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -57,11 +58,11 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 
 		//extracting labels from QueryResponse.additionalInfo
 		List<String> additionalInfoResults = result.getObjects();
-		List<String> additionalInfoLabels = new ArrayList<String>();
-		for(String queryResultItem : additionalInfoResults){
-			List<String> labels = this.getDataAboutResource(queryResultItem);
+		HashMap<String, List<String>> additionalInfoLabels = new HashMap<String, List<String>>();
+		for(String entity : additionalInfoResults){
+			List<String> labels = this.getDataAboutResource(entity);
 			if(labels != null) {
-				additionalInfoLabels.addAll(labels);
+				additionalInfoLabels.put(entity, labels);
 			}
 			else {
 				analysis.valid = false;
@@ -70,12 +71,30 @@ public class ResultItemAnalyzer implements Callable<AnalyzedQueryResponse> {
 		}
 		analysis.additionalInfoLabels = additionalInfoLabels;
 		
-		analysis.unexpectednessScore = this.computeSimilarity(resultLabels, additionalInfoLabels);
-		if(analysis.unexpectednessScore < 0) {
-			analysis.valid = false;
-		}
+		analysis.unexpectednessScore = this.computeSimilarity(analysis, resultLabels, additionalInfoLabels);
 		
 		return analysis;
+	}
+
+	private double computeSimilarity(AnalyzedQueryResponse analysis, List<String> resultLabels,
+			HashMap<String, List<String>> additionalInfoLabels) {
+		double sum = 0, counter = 0;
+		for(List<String> additionalLabels : additionalInfoLabels.values()){
+			double score = this.computeSimilarity(resultLabels, additionalLabels);
+			if(score < 0) {
+				analysis.valid = false;
+			}
+			else {
+				sum = sum + score;
+				counter++;
+			}
+		}
+		if(counter > 0) {
+			double average = sum / counter;
+			return average;
+		}
+		analysis.valid = false;
+		return 0;
 	}
 
 	private List<String> getDataAboutResource(String resource){

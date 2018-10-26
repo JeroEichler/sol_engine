@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Properties;
 
 public class Config {
+	
+	public static final String version = "1.0.2";
 
-	public static final String baseFolder = "C:/solengine/experiment/";
-		
 	public static final String rdfFormat = "N-TRIPLES";
 	
-	public static QESystemConfiguration qeConfiguration = new QESystemConfiguration(0);
+	public static QESystemConfiguration qeConfiguration = new QESystemConfiguration(6);
 	
 	public static boolean qeLimited = false;
 	
