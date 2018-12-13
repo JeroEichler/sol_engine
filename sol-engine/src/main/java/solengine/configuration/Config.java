@@ -8,12 +8,13 @@ import java.util.Properties;
 
 public class Config {
 	
-	public static final String version = "1.0.2";
+	public static final String version = "1.0.3";
 
 	public static final String rdfFormat = "N-TRIPLES";
 	
 	public static QESystemConfiguration qeConfiguration = new QESystemConfiguration(6);
 	
+	// it specifies whether the QueryExecutors will produce limited results or not.	
 	public static boolean qeLimited = false;
 	
 	public static int limit = 2;
@@ -28,35 +29,16 @@ public class Config {
 	public static String listDelimiter() {
 		return prop.getProperty("listDelimiter");
 	}
-	
-	public static int searchSize() {
-		return Integer.parseInt(prop.getProperty("searchSize"));
-	}
-	
-	public static List<String> datsets() {
-		List<String> datasets = Config.buildList(prop.getProperty("datasets"));
-		return datasets;
-	}
 
 	public static List<String> domains() {
 		List<String> domains = Config.buildList(prop.getProperty("domains"));
 		return domains;
 	}
 	
-	public static String rdfFormat() {
-		return prop.getProperty("rdfFormat");
-	}
-	
 	public static List<String> loadQueryExecutorGroups() {
 		List<String> types = Config.buildList(prop.getProperty("QETypes"));
 			
 		return types;
-	}
-	
-
-	
-	public static Boolean queryExecutorLimited() {
-		return Boolean.parseBoolean(prop.getProperty("QELimit"));
 	}
 
 	private static Properties buildProperties() {

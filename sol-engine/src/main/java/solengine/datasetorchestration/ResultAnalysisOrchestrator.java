@@ -16,7 +16,7 @@ import solengine.resultanalysis.ResultItemAnalyzer;
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of the QueryResponse analysis.
  *  
- * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QBOrchestrator
+ * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the RAOrchestrator
  * 												// works with.
  * 
  *****************************************************************************************************************/

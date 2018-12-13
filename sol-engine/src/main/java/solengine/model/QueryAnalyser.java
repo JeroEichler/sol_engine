@@ -22,12 +22,6 @@ public class QueryAnalyser {
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ) ;
 		List<String> vars = query.getResultVars();
 		
-//		for(String var :vars){
-//			System.out.println(var);
-//		}
-		
-//		System.out.println("-----------------");
-		
 		return vars;
 	}
 	
@@ -48,18 +42,45 @@ public class QueryAnalyser {
 		return true;
 	}
 	
+	/* ***************************************************************************************************************
+	* Function that evaluates if a query string is limited in results.
+	* 
+	*****************************************************************************************************************/
+	public static boolean isQueryLimited(String queryString) {
+		if(queryString.contains("LIMIT") || queryString.contains("limit")) {
+			return true;
+		}		
+		return false;
+	}
+	
+	/* ***************************************************************************************************************
+	* Function that evaluates if a query string is offseted in results.
+	* 
+	*****************************************************************************************************************/
+	public static boolean isQueryOffseted(String queryString) {
+		if(queryString.contains("OFFSET") || queryString.contains("offset")) {
+			return true;
+		}		
+		return false;
+	}
+	
 	//TODO what happens if query has already the limit clause
 	public static String limitQuery(String queryString, int limitValue) {
-		queryString = queryString + " LIMIT " + limitValue
-                ;
+		if(!isQueryLimited(queryString)) {
+			queryString = queryString + " LIMIT " + limitValue
+	                ;
+		}		
 		return queryString;
 	}
 	
 	//TODO what happens if query has already the limit clause
 	public static String limitQueryWithOffset(String queryString, int limitValue, int stepValue) {
-		queryString = limitQuery(queryString, limitValue)
-				+ " OFFSET " +limitValue * stepValue + " "
-				;
+		queryString = limitQuery(queryString, limitValue);
+		if(!isQueryOffseted(queryString)) {
+			queryString = queryString + " OFFSET " +limitValue * stepValue + " "
+					;
+		}	
+				
 		return queryString;
 	}
 

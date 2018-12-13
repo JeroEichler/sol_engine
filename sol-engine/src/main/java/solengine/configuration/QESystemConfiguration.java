@@ -1,5 +1,13 @@
 package solengine.configuration;
 
+
+/* ***************************************************************************************************************
+ * Class that encompasses the configuration of active QueryExecutors.
+ *  
+ * This enables to dynamically adjust what QueryExecutors are active.
+ * 
+ *****************************************************************************************************************/
+
 public class QESystemConfiguration {
 	
 	public boolean HierarchieAnalogy = false;

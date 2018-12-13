@@ -19,6 +19,13 @@ import solengine.queryexecution.UserQueryExecutor;
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of a set of QueryExecutors.
  *  
+ * Note: the QEOrchestrator2ndStrategy differs from the QEOrchestrator in aspect that the QEOrchestrator2ndStrategy
+ * 		processes only one QueryResponse each time. This way, if only one QueryExecutor type is active or the
+ * 		QueryResponses set is already given, the QEOrchestrator is better suited for such circumstances. On the 
+ * 		other hand, QEOrchestrator2ndStrategy is better used in cases where there is many QueryExecutors or it is
+ * 		desired to partially display results as they come, i.e. not necessarily wait until the entire process is 
+ * 		completed.
+ * 
  * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QEOrchestrator
  * 												// works with.
  * 				(2) Map<List<String>,QueryResponse>		

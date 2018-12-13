@@ -21,7 +21,7 @@ public class ModelIO {
 
 	public static String modelToString(Model model){
 		StringWriter sw = new StringWriter();
-		model.write(sw, Config.rdfFormat());
+		model.write(sw, Config.rdfFormat);
 		String temp = sw.toString();
 		return temp;
 	}
@@ -29,7 +29,7 @@ public class ModelIO {
 	public static Model stringTomodel(String model){
 		StringReader sr = new StringReader(model);
 		Model loadedModel = ModelFactory.createDefaultModel();
-		loadedModel.read(sr, null, Config.rdfFormat());
+		loadedModel.read(sr, null, Config.rdfFormat);
 		return loadedModel;
 	}
 
