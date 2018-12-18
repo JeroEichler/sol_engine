@@ -30,7 +30,7 @@ public class QueryResponse implements Serializable {
 	
 	public QueryResponse(List<String> result, Model model){
 		this.result = result;
-		this.model = ModelConverter.modelToString(model);
+		this.model = ModelConverter.fromModel(model);
 	}
 	
 	public QueryResponse(List<String> result, boolean valid){
@@ -44,7 +44,7 @@ public class QueryResponse implements Serializable {
 	}
 	
 	public Model getAdditionalInfo(){
-		return ModelConverter.stringTomodel(model);
+		return ModelConverter.toModel(model);
 	}
 	
 	public List<String> getObjects(){

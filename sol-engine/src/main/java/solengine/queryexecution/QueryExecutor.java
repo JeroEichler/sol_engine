@@ -19,6 +19,13 @@ import solengine.queryexecution.generic.SimpleBasicQE;
  * 
  * 
  * A QueryExecutor has the following properties.
+ * 		(1) String endpoint;  			//dataset endpoint address.
+ * 		(2) String queryString; 		//composed query string submitted.
+ * 		(3) String subject;  			//the entity that the composed query string is about.
+ * 		(4) List<String> querySolution; //the result of the original submitted query. it is used in the composition
+ * 										//of the QueryResponse that is returned after the complete query process.
+ * 		(5) boolean limitedQueryExecutor;  			
+ * 										//if queryString present restricted results.
  *****************************************************************************************************************/
 public abstract class QueryExecutor extends QueryElement implements IQueryExecutor {
 	

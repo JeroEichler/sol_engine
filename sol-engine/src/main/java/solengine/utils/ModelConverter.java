@@ -21,7 +21,7 @@ import solengine.model.dto.TripleDto;
 
 public class ModelConverter {
 	
-	public static QueryResponseDto convert(QueryResponse origin) {
+	public static QueryResponseDto toDto(QueryResponse origin) {
 		QueryResponseDto target = new QueryResponseDto();
 		target.result = origin.getResult();		
 
@@ -46,7 +46,7 @@ public class ModelConverter {
 		return target;
 	}
 	
-	public static QueryResponse convert(QueryResponseDto origin) {
+	public static QueryResponse fromDto(QueryResponseDto origin) {
 		
 		List<String> result = origin.result;	
 		
@@ -63,8 +63,8 @@ public class ModelConverter {
 		return target;
 	}
 	
-	public static AnalyzedQueryResponseDto convert(AnalyzedQueryResponse origin) {
-		QueryResponseDto qrd = convert(origin.queryResponse);
+	public static AnalyzedQueryResponseDto toDto(AnalyzedQueryResponse origin) {
+		QueryResponseDto qrd = toDto(origin.queryResponse);
 		
 		AnalyzedQueryResponseDto target = new AnalyzedQueryResponseDto(qrd);
 		target.additionalInfoLabels = origin.additionalInfoLabels;
@@ -76,8 +76,8 @@ public class ModelConverter {
 		return target;
 	}
 	
-	public static AnalyzedQueryResponse convert(AnalyzedQueryResponseDto origin) {
-		QueryResponse qr = convert(origin.queryResponse);
+	public static AnalyzedQueryResponse fromDto(AnalyzedQueryResponseDto origin) {
+		QueryResponse qr = fromDto(origin.queryResponse);
 		
 		AnalyzedQueryResponse target = new AnalyzedQueryResponse(qr);
 		target.additionalInfoLabels = origin.additionalInfoLabels;
@@ -90,7 +90,7 @@ public class ModelConverter {
 	}
 	
 
-	public static String modelToString(Model model){
+	public static String fromModel(Model model){
 		StringWriter sw = new StringWriter();
 		model.write(sw, Config.rdfFormat);
 		String temp = sw.toString();
@@ -98,7 +98,7 @@ public class ModelConverter {
 		return temp;
 	}
 	
-	public static Model stringTomodel(String model){
+	public static Model toModel(String model){
 		StringReader sr = new StringReader(model);
 		Model loadedModel = ModelFactory.createDefaultModel();
 		loadedModel.read(sr, null, Config.rdfFormat);
