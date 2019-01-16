@@ -1,37 +1,18 @@
 package solengine.utils;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.ArrayList;import java.util.List;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
-import solengine.configuration.Config;
-
 public class ModelIO {
-
-	public static String modelToString(Model model){
-		StringWriter sw = new StringWriter();
-		model.write(sw, Config.rdfFormat);
-		String temp = sw.toString();
-		return temp;
-	}
-	
-	public static Model stringTomodel(String model){
-		StringReader sr = new StringReader(model);
-		Model loadedModel = ModelFactory.createDefaultModel();
-		loadedModel.read(sr, null, Config.rdfFormat);
-		return loadedModel;
-	}
 
 	/* ***************************************************************************************************************
 	 * Function that iterate over a model in order to print its RDF statements.

@@ -16,9 +16,9 @@ import solengine.queryexecution.QueryExecutor;
  * for any entity <entity>
  * 
  *****************************************************************************************************************/
-public class InfluenceAnalogyQE extends QueryExecutor {
+public class InfluenceCategoryAnalogyQE extends QueryExecutor {
 
-	public InfluenceAnalogyQE(String endpoint, List<String> param) {
+	public InfluenceCategoryAnalogyQE(String endpoint, List<String> param) {
 		
 		this.endpoint = endpoint;
 		this.subject = this.getRandomResource(param);
@@ -28,6 +28,8 @@ public class InfluenceAnalogyQE extends QueryExecutor {
 				"	WHERE{" +
 				"		?auxInfluence <"+Vocabulary.DB_InfluencedProperty+"> ?analogousEntity; " +
 				"			<"+Vocabulary.DB_InfluencedProperty+">  <"+subject+">. " +
+				"		<"+subject+"> <"+Vocabulary.DC_SubjectProperty+"> ?auxCategory. " +
+				"		?analogousEntity <"+Vocabulary.DC_SubjectProperty+"> ?auxCategory. " +
 				"		FILTER (?analogousEntity != <"+subject+">)" +	
 				"	}"
 				;

@@ -12,9 +12,6 @@ import solengine.queryexecution.QueryExecutor;
  * 		<subject> <dbp:collection> <entity>
  * 		<museumSimilar> <dbp:collection> <entity>
  * 
- * to summarize, we link <subject> to <museumSimilar> when there is a <?artWorkAux> from a commom <artist> to both
- * <subject> to <museumSimilar>
- * 
  *****************************************************************************************************************/
 public class CollectionAnalogyQE extends QueryExecutor {
 	

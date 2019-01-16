@@ -10,21 +10,21 @@ import java.util.concurrent.ThreadPoolExecutor;
 import solengine.model.AnalyzedQueryResponse;
 import solengine.model.QueryResponse;
 import solengine.model.Vocabulary;
-import solengine.resultanalysis.ResultItemAnalyzer;
+import solengine.resultanalysis.QueryResponseAnalyzer;
 
 
 /* ***************************************************************************************************************
  * Class that encompasses the orchestration process of the QueryResponse analysis.
  *  
- * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the RAOrchestrator
+ * Properties:	(1) String datasetEndpoint; 	// represents the remote dataset endpoint that the QRAOrchestrator
  * 												// works with.
  * 
  *****************************************************************************************************************/
-public class ResultAnalysisOrchestrator {
+public class QueryResponseAnalysisOrchestrator {
 	
 	private String datasetEndpoint = Vocabulary.EmptyString;
 	
-	public ResultAnalysisOrchestrator(String endpoint) {
+	public QueryResponseAnalysisOrchestrator(String endpoint) {
 		this.datasetEndpoint = endpoint;
 	}
 
@@ -35,9 +35,9 @@ public class ResultAnalysisOrchestrator {
         
 		for(QueryResponse resultItem : results){
 			if(resultItem.getObjects().size() > 0) {
-				// MAP STEP: for each QueryResponse item, a ResultItemAnalyzer executor will be dispatch to compute
+				// MAP STEP: for each QueryResponse item, a QueryResponseAnalyzer executor will be dispatch to compute
 				//// the score of the QueryResponse.
-				ResultItemAnalyzer analyzer = new ResultItemAnalyzer(resultItem, this.datasetEndpoint);
+				QueryResponseAnalyzer analyzer = new QueryResponseAnalyzer(resultItem, this.datasetEndpoint);
 				temporaryResults.add(executor.submit(analyzer));
 			}
 			else {

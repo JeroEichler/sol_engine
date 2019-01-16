@@ -5,6 +5,21 @@ import java.util.List;
 import solengine.model.Vocabulary;
 import solengine.queryexecution.QueryExecutor;
 
+
+/* ***************************************************************************************************************
+ * Class that customize the QueryExecutor to construct statements of the form
+ * 		<subject> <sol:analogousTo> <entity>
+ * when auxCategory is randomly selected
+ * and exists
+ * 		<subject> <dc:subject> <auxCategory>
+ * 		<entity> <dc:subject> <category>
+ * 
+ * 		<auxCategory> <skos:broader> <fatherCategory>
+ * 		<category> <skos:broader> <fatherCategory>
+ * 
+ * i.e. entity is a resource that belong to a category that is a sibling category of a category of the subject.
+ * 
+ *****************************************************************************************************************/
 public class HierarchieAnalogyQE_Alt2 extends QueryExecutor {
 
 	public HierarchieAnalogyQE_Alt2(String endpoint, List<String> param) {

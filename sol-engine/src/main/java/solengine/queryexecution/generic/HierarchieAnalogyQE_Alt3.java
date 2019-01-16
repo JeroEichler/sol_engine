@@ -5,6 +5,20 @@ import java.util.List;
 import solengine.model.Vocabulary;
 import solengine.queryexecution.QueryExecutor;
 
+
+/* ***************************************************************************************************************
+ * Class that customize the QueryExecutor to construct statements of the form
+ * 		<subject> <sol:analogousTo> <entity>
+ * when auxCategory is maximized (is object of many triples)
+ * and exists
+ * 		<subject> <dc:subject> <auxCategory>
+ * 		<entity> <dc:subject> <category>
+ * 
+ * 		<sonCategory> <skos:broader> <auxCategory>
+ * 		<sonCategory> <skos:broader> <category>
+ * 
+ * 
+ *****************************************************************************************************************/
 public class HierarchieAnalogyQE_Alt3 extends QueryExecutor {
 
 	public HierarchieAnalogyQE_Alt3(String endpoint, List<String> param) {
