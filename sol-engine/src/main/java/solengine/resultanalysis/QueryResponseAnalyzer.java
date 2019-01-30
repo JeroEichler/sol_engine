@@ -84,10 +84,7 @@ public class QueryResponseAnalyzer implements Callable<AnalyzedQueryResponse> {
 		double sum = 0, counter = 0;
 		for(List<String> additionalLabels : additionalInfoLabels.values()){
 			double score = this.computeSimilarity(resultLabels, additionalLabels);
-			if(score < 0) {
-				analysis.valid = false;
-			}
-			else {
+			if(score >= 0) {
 				sum = sum + score;
 				counter++;
 			}
@@ -96,7 +93,7 @@ public class QueryResponseAnalyzer implements Callable<AnalyzedQueryResponse> {
 			double average = sum / counter;
 			return average;
 		}
-		analysis.valid = false;
+		analysis.emptyResponse = false;
 		return 0;
 	}
 
