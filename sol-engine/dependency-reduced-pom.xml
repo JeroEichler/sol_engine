@@ -4,7 +4,7 @@
   <groupId>eichler.jeronimo</groupId>
   <artifactId>sol-engine</artifactId>
   <name>sol-engine</name>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>1.1.2-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>

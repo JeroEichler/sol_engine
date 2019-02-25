@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class Config {
 	
-	public static final String version = "1.1.1";
+	public static final String version = "1.1.2";
 
 	public static final String rdfFormat = "N-TRIPLES";
 	
